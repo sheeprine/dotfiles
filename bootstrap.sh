@@ -1,0 +1,10 @@
+#!/bin/sh
+
+OS=$(uname)
+if [ $OS = "Darwin" ]; then
+  test -x /usr/local/bin/brew || \
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew install ansible
+else
+  sudo apt update && sudo apt install -y ansible
+fi
