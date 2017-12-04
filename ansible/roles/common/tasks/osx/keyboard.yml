@@ -1,0 +1,17 @@
+---
+- name: Check for keyboard remap
+  command: defaults -currentHost read NSGlobalDomain
+  register: globalprefs
+
+- name: Remap caps lock to escape
+  command: >
+    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.1452-630-0" -dict
+    HIDKeyboardModifierMappingDst 30064771113
+    HIDKeyboardModifierMappingSrc 30064771129
+  when: '"com.apple.keyboard.modifiermapping.1452-630-0" not in globalprefs.stdout'
+
+- name: Set F-Keys as default
+  osx_defaults:
+    key: com.apple.keyboard.fnState
+    type: int
+    value: 1

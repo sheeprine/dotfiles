@@ -1,0 +1,32 @@
+---
+- name: Install zplug from sources
+  shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+  args:
+    creates: "{{ ansible_env.HOME }}/.zplug"
+
+- name: Create zsh config files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.{{ item }}"
+  with_items:
+    - zshrc
+
+- name: Copy tmux configuration
+  copy:
+    src: "tmux.conf"
+    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+
+- name: Add zsh to allowed shells
+  copy:
+    src: shells
+    dest: /etc/shells
+    owner: root
+    group: wheel
+    mode: "0644"
+  when: false
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/local/bin/zsh
+  become: yes

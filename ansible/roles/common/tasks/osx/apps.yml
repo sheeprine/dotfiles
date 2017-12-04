@@ -1,0 +1,21 @@
+---
+- name: Add tap to homebrew
+  homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - "{{ apps_tap }}"
+
+- name: Install homebrew applications
+  homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - "{{ apps_homebrew }}"
+
+- name: Install homebrew cask applications
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - "{{ apps_cask }}"

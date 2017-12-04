@@ -1,0 +1,55 @@
+source $HOME/.zplug/init.zsh
+
+# Git
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/gitignore", from:oh-my-zsh
+
+# SSH/GPG Agent
+zplug "plugins/ssh-agent", from:oh-my-zsh
+zplug "plugins/gpg-agent", from:oh-my-zsh
+
+zplug "plugins/taskwarrior", from:oh-my-zsh
+zplug "plugins/golang", from:oh-my-zsh
+#zplug "piotryordanov/fzf-mpd", from:github
+#
+zplug "zsh-users/zsh-completions"
+
+if [[ $OSTYPE == darwin* ]]; then
+  zplug "plugins/osx", from:oh-my-zsh
+  zplug '/usr/local/opt/fzf/shell', from:local
+else
+  zplug '~/.fzf', from:local
+fi
+
+# Async exec, required by theme
+zplug mafredri/zsh-async, from:github
+# Theme
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
+
+autoload -U compinit && compinit
+
+# Locales
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export TERM=xterm-256color
+export BROWSER=open
+export VISUAL=vimr
+export EDITOR=nvim
+
+# Paths
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$PATH"
+
+# Lazy alias
+alias vim='nvim'

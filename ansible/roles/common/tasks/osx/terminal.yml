@@ -1,0 +1,64 @@
+---
+- name: Install solarized terminal.app themes
+  block:
+    - name: Create temporary directory for Terminal themes
+      tempfile:
+        state: directory
+        prefix: term-themes
+      register: temp_path
+
+    - name: Download files
+      get_url:
+        url: "{{ item }}" 
+        dest: "{{ temp_path.path }}"
+      with_items: "{{ themes }}"
+      register: theme_files
+
+    - name: Extract theme names
+      shell: "plutil -extract name xml1 -o - {{ item.dest }} | plutil -p - | tr -d '\"'"
+      with_items: "{{ theme_files.results }}"
+      register: theme_names
+
+    - name: Extract current preferences
+      command: "defaults export com.apple.Terminal -"
+      register: preferences
+
+    - name: Save preferences to file
+      copy:
+        content: "{{ preferences.stdout }}"
+        dest: "{{ temp_path.path }}/term_settings.xml"
+
+    - name: Copy merging script
+      copy:
+        src: files/add_theme.py
+        dest: "{{ temp_path.path }}/add_theme.py"
+        mode: "0755"
+
+    - name: Merge theme in preferences
+      command: "{{ temp_path.path }}/add_theme.py {{ temp_path.path }}/term_settings.xml {{ item.1.dest }}"
+      # TODO(sheeprine): Add a check in python to see if setting is already installed
+      with_together:
+        - "{{ theme_names.results }}"
+        - "{{ theme_files.results }}"
+      when: item.0.stdout not in preferences.stdout
+      register: merged
+
+    - name: Apply new preferences
+      command: "defaults import com.apple.Terminal {{ temp_path.path }}/term_settings.xml"
+      when: merged.changed
+
+    - name: Set default theme
+      osx_defaults:
+        domain: com.apple.Terminal
+        key: "{{ item }}"
+        value: "{{ default_theme }}"
+      items:
+        - "Default Window Settings"
+        - "Startup Window Settings"
+      when: merged.changed
+
+  always:
+    - name: Clean temporary files
+      file:
+        path: "{{ temp_path.path }}"
+        state: absent

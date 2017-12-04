@@ -1,0 +1,9 @@
+[user]
+  email = sheeprine@oh.its.fake.nullplace.com
+  name = Stéphane Albert
+
+[push]
+  default = current
+
+[gitreview]
+  username = sheeprine

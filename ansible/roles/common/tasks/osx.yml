@@ -1,0 +1,7 @@
+---
+- include_vars: osx.yml
+- include_tasks: osx/apps.yml
+- include_tasks: osx/common.yml
+- include_tasks: osx/terminal.yml
+- include_tasks: osx/keyboard.yml
+- include_tasks: osx/mouse.yml

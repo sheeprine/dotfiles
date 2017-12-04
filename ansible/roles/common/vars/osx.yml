@@ -1,0 +1,21 @@
+---
+apps_tap:
+  - caskroom/fonts
+
+apps_cask:
+  - google-chrome
+  - firefox
+  - macpass
+  - vimr
+  - font-hack
+
+apps_homebrew:
+  - fzf
+  - ranger
+  - zsh
+  - reattach-to-user-namespace
+
+themes:
+  - "https://raw.githubusercontent.com/abeltay/solarized/master/Solarized-Dark.terminal"
+  - "https://raw.githubusercontent.com/abeltay/solarized/master/Solarized-Light.terminal"
+default_theme: "Solarized-Dark"
