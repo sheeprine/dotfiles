@@ -47,6 +47,9 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
+" OpenSCAD syntax highlighting
+Plug 'sirtaj/vim-openscad'
+
 " Auto create dir on save
 Plug 'benizi/vim-automkdir'
 
