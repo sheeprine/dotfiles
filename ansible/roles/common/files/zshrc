@@ -67,6 +67,7 @@ export GIT_EDITOR=$EDITOR
 # Paths
 export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
+export PATH="/usr/local/opt/python@2/bin:$PATH"
 
 # Lazy alias
 alias vim='nvim'
