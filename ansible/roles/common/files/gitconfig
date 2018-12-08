@@ -7,3 +7,18 @@
 
 [gitreview]
   username = sheeprine
+
+[merge]
+  tool = vimdiff
+
+[mergetool]
+  prompt = true
+
+[diff]
+  tool = vimdiff
+
+[difftool]
+  prompt = false
+
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
