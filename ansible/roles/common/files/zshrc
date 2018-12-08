@@ -35,6 +35,10 @@ zplug load
 
 autoload -U compinit && compinit
 
+# ESC+BKSPC stop at non alphanumerical (bash style)
+autoload -U select-word-style
+select-word-style bash
+
 # Locales
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
