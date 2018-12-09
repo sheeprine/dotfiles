@@ -10,8 +10,16 @@ Plug 'iCyMind/NeoSolarized'
 " Fuzzy finder
 if has('macunix')
   " Installed via homebrew on osx
-  Plug '/usr/local/opt/fzf'
+  if (isdirectory('/usr/local/opt/fzf'))
+    Plug '/usr/local/opt/fzf'
+  endif
+endif
+
+if (isdirectory($HOME . '/.fzf'))
+  " Already installed locally
+  Plug '~/.fzf'
 else
+  " Install it using nvim
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 endif
 
