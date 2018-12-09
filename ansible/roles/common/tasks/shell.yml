@@ -9,8 +9,8 @@
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.{{ item }}"
-  with_items:
-    - zshrc
+  loop:
+  - zshrc
 
 - name: Copy tmux configuration
   copy:

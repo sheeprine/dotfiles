@@ -13,9 +13,9 @@
   copy:
     src: "nvim/{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/nvim/"
-  with_items:
-    - init.vim
-    - plugins.vim
+  loop:
+  - init.vim
+  - plugins.vim
 
 - name: Install vim-plug
   get_url:
