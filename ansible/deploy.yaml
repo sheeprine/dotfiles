@@ -2,6 +2,7 @@
 - hosts: all
   roles:
   - common
+  - nvim
   tasks:
   - include_role:
       name: wm
