@@ -3,6 +3,7 @@
   shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
   args:
     creates: "{{ ansible_env.HOME }}/.zplug"
+    warn: false
 
 - name: Create zsh config files
   copy:
@@ -16,17 +17,20 @@
     src: "tmux.conf"
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
 
+- name: Detect zsh path
+  command: which zsh
+  register: zsh_path
+  changed_when: false
+
 - name: Add zsh to allowed shells
-  copy:
-    src: shells
-    dest: /etc/shells
-    owner: root
-    group: wheel
-    mode: "0644"
-  when: false
+  become: yes
+  lineinfile:
+    path: /etc/shells
+    regexp: "^{{ zsh_path.stdout }}$"
+    line: "{{ zsh_path.stdout }}"
 
 - name: Set zsh as default shell
   user:
     name: "{{ ansible_user_id }}"
-    shell: /usr/local/bin/zsh
+    shell: "{{ zsh_path.stdout }}"
   become: yes
