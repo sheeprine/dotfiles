@@ -1,4 +1,8 @@
 ---
 - hosts: all
   roles:
-    - common
+  - common
+  tasks:
+  - include_role:
+      name: wm
+    when: ansible_os_family == "Debian"

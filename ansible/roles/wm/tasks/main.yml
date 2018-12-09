@@ -1,0 +1,32 @@
+---
+- name: Install desktop environment
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+  - i3
+  - lightdm
+
+- name: Install j4 dmenu replacement
+  become: true
+  apt:
+    name: "j4-dmenu-desktop"
+    state: latest
+  when: use_j4
+
+- name: Create i3 configuration directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/i3"
+    state: directory
+
+- name: Copy i3 configuration file
+  template:
+    src: "config.j2"
+    dest: "{{ ansible_env.HOME }}/.config/i3/"
+
+- name: Set i3 as lightdm default session
+  become: true
+  copy:
+    src: "i3.conf"
+    dest: "/etc/lightdm/lightdm.conf.d/"
