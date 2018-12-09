@@ -1,0 +1,20 @@
+---
+- name: Install/update neovim
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+  - neovim
+
+- name: Install neovim plugins dependencies
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+  - git
+  - golang
+  - python-setuptools
+  - python3-setuptools
+  - python3-dev

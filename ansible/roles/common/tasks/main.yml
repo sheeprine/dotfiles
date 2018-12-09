@@ -7,13 +7,6 @@
   include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- name: Include vim related tasks
-  include_tasks: vim.yml
-  tags:
-    - vim
-    - neovim
-    - nvim
-
 - name: Include shell related tasks
   include_tasks: shell.yml
   tags:

@@ -1,4 +1,10 @@
 ---
+- include_tasks: osx.yml
+  when: ansible_os_family == "Darwin"
+
+- include_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
 - name: Create nvim config directory
   file:
     path: "{{ ansible_env.HOME }}/.config/nvim/"
@@ -11,7 +17,7 @@
 
 - name: Copy nvim configuration
   copy:
-    src: "nvim/{{ item }}"
+    src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/nvim/"
   loop:
   - init.vim
