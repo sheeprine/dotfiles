@@ -7,3 +7,6 @@
   - include_role:
       name: wm
     when: ansible_os_family == "Debian"
+  - include_role:
+      name: osx
+    when: ansible_os_family == "Darwin"
