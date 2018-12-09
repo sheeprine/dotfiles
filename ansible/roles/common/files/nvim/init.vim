@@ -42,7 +42,10 @@ set foldmethod=indent
 
 " Colorscheme
 set background=dark
-colorscheme NeoSolarized
+" Detect if coloscheme is installed to avoid error on start
+if index(getcompletion('', 'color'), 'NeoSolarized') >= 0
+  colorscheme NeoSolarized
+endif
 
 set pastetoggle=<F12>
 
