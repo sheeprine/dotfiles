@@ -1,4 +1,10 @@
 ---
+- include_tasks: osx.yml
+  when: ansible_os_family == "Darwin"
+
+- include_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
 - name: Install zplug from sources
   shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
   args:
@@ -7,15 +13,8 @@
 
 - name: Create zsh config files
   copy:
-    src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/.{{ item }}"
-  loop:
-  - zshrc
-
-- name: Copy tmux configuration
-  copy:
-    src: "tmux.conf"
-    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    src: zshrc
+    dest: "{{ ansible_env.HOME }}/.zshrc"
 
 - name: Detect zsh path
   command: which zsh
@@ -30,7 +29,7 @@
     line: "{{ zsh_path.stdout }}"
 
 - name: Set zsh as default shell
+  become: yes
   user:
     name: "{{ ansible_user_id }}"
     shell: "{{ zsh_path.stdout }}"
-  become: yes

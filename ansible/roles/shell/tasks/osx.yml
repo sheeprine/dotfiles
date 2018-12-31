@@ -1,0 +1,14 @@
+---
+- name: Install/update zsh
+  homebrew:
+    name: zsh
+    state: latest
+
+- name: Install zplug dependencies
+  homebrew:
+    name: "{{ item }}"
+    state: latest
+  loop:
+  - curl
+  - gawk
+  - git
