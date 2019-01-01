@@ -79,7 +79,8 @@ set formatoptions+=r
 set formatoptions-=c
 set formatoptions-=t
 
-set noswapfile
+" Persistent undo tree
+set undofile
 
 " Switch directory to current file
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
