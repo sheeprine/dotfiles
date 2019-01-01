@@ -3,6 +3,8 @@
   roles:
   - common
   - nvim
+  - shell
+  - tools
   tasks:
   - include_role:
       name: wm
