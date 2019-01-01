@@ -88,21 +88,64 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 " Make vim quiet (no confirmation)
 set shortmess+=filmnrxoOtT
 
-
 " Lightline
-let g:lightline = {'colorscheme': 'solarized'}
+function! LightlineFugitive()
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch !=# '' ? ''.branch : ''
+  endif
+  return ''
+endfunction
 
-" Lightline ALE integration
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'component': { 'lineinfo': ' %3l:%-2v' },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+\ }
+
+let g:lightline.component_function = {
+      \ 'readonly': 'LightlineReadonly',
+      \ 'fugitive': 'LightlineFugitive'
+\ }
+
 let g:lightline.component_expand = {
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
+      \ 'linter_checking': 'lightline#ale#checking',
+      \ 'linter_warnings': 'lightline#ale#warnings',
+      \ 'linter_errors': 'lightline#ale#errors',
+      \ 'linter_ok': 'lightline#ale#ok',
+\ }
+
 let g:lightline.component_type = {
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \ }
-let g:lightline.active = { 'right': [[ 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
+      \ 'linter_checking': 'left',
+      \ 'linter_warnings': 'warning',
+      \ 'linter_errors': 'error',
+      \ 'linter_ok': 'left',
+\ }
+
+let g:lightline.active = {
+      \ 'left': [[
+        \ 'mode',
+        \ 'paste' ],
+        \ [ 'gitbranch',
+          \ 'readonly',
+          \ 'filename',
+          \ 'modified' ],
+      \ ],
+      \ 'right': [[
+        \ 'linter_checking',
+        \ 'linter_errors',
+        \ 'linter_warnings',
+        \ 'linter_ok' ],
+        \ [ 'lineinfo' ],
+        \ [ 'percent' ],
+        \ [ 'fileformat', 'fileencoding', 'filetype' ],
+      \]
+\ }
 
 " fzf shortcuts
 nnoremap <silent> <Leader>f :Files<CR>
