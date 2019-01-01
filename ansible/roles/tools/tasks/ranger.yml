@@ -1,0 +1,40 @@
+---
+- name: Install ranger
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+  - ranger
+  - atool
+  - caca-utils
+  - w3m-img
+  - highlight
+  - poppler-utils
+  when: ansible_os_family == "Debian"
+
+- name: Install ranger
+  homebrew:
+    name: "{{ item }}"
+    state: latest
+  loop:
+  - ranger
+  - atool
+  - highlight
+  - poppler
+  when: ansible_os_family == "Darwin"
+
+- name: Disable image preview in macOSX
+  set_fact:
+    preview_images: false
+  when: ansible_os_family == "Darwin"
+
+- name: Install custom ranger configuration file
+  template:
+    src: ranger/rc.conf.j2
+    dest: "{{ ansible_env.HOME }}/.config/ranger/rc.conf"
+
+- name: Copy ranger default scope and rile configuration
+  command: "ranger --copy-config={{ item }}"
+  loop:
+  - scope
+  - rifle
