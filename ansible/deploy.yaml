@@ -3,6 +3,7 @@
   roles:
   - nvim
   - shell
+  - term
   - tools
   tasks:
   - name: Include window manager tasks

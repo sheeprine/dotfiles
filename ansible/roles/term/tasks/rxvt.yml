@@ -1,0 +1,31 @@
+---
+- name: Ensure rxvt xresources.d directory is present
+  file:
+    path: "{{ ansible_env.HOME }}/.Xresources.d/rxvt"
+    state: directory
+
+- name: Download rxvt colorschemes
+  get_url:
+    url: "{{ item.1 }}"
+    dest: "{{ ansible_env.HOME }}/.Xresources.d/rxvt/{{ item.0 }}"
+    force: yes
+  loop: "{{ rxvt_themes | dictsort }}"
+
+- name: Install rxvt configuration file
+  template:
+    src: "rxvt.j2"
+    dest: "{{ ansible_env.HOME }}/.Xresources.d/rxvt.xresources"
+  notify:
+  - reload xrdb
+
+- name: Load configuration in Xresources
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.Xresources"
+    create: yes
+    line: '#include ".Xresources.d/rxvt.xresources"'
+
+- name: Install rxvt
+  become: true
+  apt:
+    name: rxvt-unicode
+    state: present

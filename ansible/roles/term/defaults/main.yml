@@ -1,0 +1,9 @@
+---
+use_rxvt: true
+rxvt_theme: "solarized-dark"
+rxvt_themes:
+  gruvbox-dark: "https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/xresources/gruvbox-dark.xresources"
+  gruvbox-light: "https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/xresources/gruvbox-light.xresources"
+  solarized-dark: "https://raw.githubusercontent.com/solarized/xresources/master/Xresources.dark"
+  solarized-light: "https://raw.githubusercontent.com/solarized/xresources/master/Xresources.light"
+default_term: "rxvt"
