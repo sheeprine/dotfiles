@@ -20,6 +20,7 @@
   command: which zsh
   register: zsh_path
   changed_when: false
+  check_mode: no
 
 - name: Add zsh to allowed shells
   become: yes
