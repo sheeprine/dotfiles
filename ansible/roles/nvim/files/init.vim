@@ -46,6 +46,10 @@ set background=dark
 if index(getcompletion('', 'color'), 'NeoSolarized') >= 0
   colorscheme NeoSolarized
 endif
+" Enable true colors if available
+if ($COLORTERM=='truecolor')
+  set termguicolors
+endif
 
 set pastetoggle=<F12>
 
