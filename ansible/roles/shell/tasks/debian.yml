@@ -10,3 +10,14 @@
   apt:
     name: "{{ zplug_dependencies }}"
     state: present
+
+- name: Install fzf from sources
+  git:
+    repo: "https://github.com/junegunn/fzf.git"
+    depth: 1
+    dest: "{{ ansible_env.HOME }}/.fzf"
+  register: fzf_repo
+
+- name: Install fzf binaries
+  command: "{{ ansible_env.HOME }}/.fzf/install --bin"
+  when: fzf_repo is changed
