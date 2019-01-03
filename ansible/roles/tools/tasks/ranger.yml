@@ -24,9 +24,31 @@
   vars:
     preview_images: "{{ not (ansible_os_family == 'Darwin') }}"
 
-- name: Copy ranger default scope and rile configuration
-  command: "ranger --copy-config={{ item }}"
-  loop:
-  - scope
-  - rifle
+- name: Deploy ranger default scope and rile configuration
   when: not ansible_check_mode
+  block:
+  - name: Create temporary directory to store new conf files
+    tempfile:
+      state: directory
+    register: ranger_temp
+    changed_when: no
+  - name: Copy ranger files to temporary directory
+    command: "ranger -r {{ ranger_temp.path }} --copy-config={{ item }}"
+    loop:
+    - scope
+    - rifle
+    changed_when: no
+  - name: Copy ranger configuration files if newer
+    copy:
+      src: "{{ ranger_temp.path }}/{{ item }}"
+      dest: "{{ ansible_env.HOME }}/.config/ranger/"
+      remote_src: yes
+    loop:
+    - scope.sh
+    - rifle.conf
+  always:
+  - name: Delete ranger temporary directory
+    file:
+      path: "{{ ranger_temp.path }}"
+      state: absent
+    changed_when: no
