@@ -35,3 +35,4 @@
   loop:
   - scope
   - rifle
+  when: not ansible_check_mode
