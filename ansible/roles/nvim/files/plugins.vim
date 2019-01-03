@@ -20,7 +20,7 @@ if (isdirectory($HOME . '/.fzf'))
   Plug '~/.fzf'
 else
   " Install it using nvim
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 endif
 
 " Async Linter
