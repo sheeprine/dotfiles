@@ -3,8 +3,8 @@ if !has('nvim')
 endif
 
 " python virtualenvs
-let g:python_host_prog = stdpath('data').'pyvenv/python2'
-let g:python3_host_prog = stdpath('data').'pyvenv/python3'
+let g:python_host_prog = stdpath('data').'/pyvenv/python2/bin/python'
+let g:python3_host_prog = stdpath('data').'/pyvenv/python3/bin/python'
 
 " Install plugins
 exe 'source '.stdpath('config').'/plugins.vim'
