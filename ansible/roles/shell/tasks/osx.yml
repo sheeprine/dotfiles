@@ -6,5 +6,5 @@
 
 - name: Install zplug dependencies
   homebrew:
-    name: "{{ zplug_dependencies }}"
+    name: "{{ zplug_dependencies }} + ['fzf']"
     state: present
