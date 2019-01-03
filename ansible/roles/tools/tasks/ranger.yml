@@ -23,15 +23,12 @@
   - poppler
   when: ansible_os_family == "Darwin"
 
-- name: Disable image preview in macOSX
-  set_fact:
-    preview_images: false
-  when: ansible_os_family == "Darwin"
-
 - name: Install custom ranger configuration file
   template:
     src: ranger/rc.conf.j2
     dest: "{{ ansible_env.HOME }}/.config/ranger/rc.conf"
+  vars:
+    preview_images: "{{ not (ansible_os_family == 'Darwin') }}"
 
 - name: Copy ranger default scope and rile configuration
   command: "ranger --copy-config={{ item }}"
