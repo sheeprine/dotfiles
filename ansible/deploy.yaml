@@ -5,9 +5,11 @@
   - shell
   - tools
   tasks:
-  - include_role:
+  - name: Include window manager tasks
+    include_role:
       name: wm
     when: ansible_os_family == "Debian"
-  - include_role:
+  - name: Include OSX related tasks
+    include_role:
       name: osx
     when: ansible_os_family == "Darwin"
