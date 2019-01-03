@@ -1,2 +1,17 @@
 ---
 nvim_venv_dir: "{{ ansible_env.HOME }}/.local/share/nvim/pyvenv"
+nvim_debian_dependencies:
+- git
+- golang
+- python-pip
+- python-setuptools
+- python-dev
+- python3-pip
+- python3-setuptools
+- python3-dev
+nvim_osx_dependencies:
+- git
+- golang
+- python-setuptools
+- python3-setuptools
+- python3-dev

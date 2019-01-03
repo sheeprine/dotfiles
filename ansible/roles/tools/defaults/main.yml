@@ -1,2 +1,14 @@
 ---
 preview_images: true
+ranger_debian_packages:
+- ranger
+- atool
+- caca-utils
+- w3m-img
+- highlight
+- poppler-utils
+ranger_osx_packages:
+- ranger
+- atool
+- highlight
+- poppler

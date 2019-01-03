@@ -6,9 +6,5 @@
 
 - name: Install zplug dependencies
   homebrew:
-    name: "{{ item }}"
+    name: "{{ zplug_dependencies }}"
     state: present
-  loop:
-  - curl
-  - gawk
-  - git

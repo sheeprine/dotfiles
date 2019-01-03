@@ -1,0 +1,5 @@
+---
+zplug_dependencies:
+- curl
+- gawk
+- git

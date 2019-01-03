@@ -23,14 +23,5 @@
 - name: Install neovim plugins dependencies
   become: true
   apt:
-    name: "{{ item }}"
+    name: "{{ nvim_debian_dependencies }}"
     state: present
-  loop:
-  - git
-  - golang
-  - python-pip
-  - python-setuptools
-  - python-dev
-  - python3-pip
-  - python3-setuptools
-  - python3-dev

@@ -8,9 +8,5 @@
 - name: Install zplug dependencies
   become: true
   apt:
-    name: "{{ item }}"
+    name: "{{ zplug_dependencies }}"
     state: present
-  loop:
-  - curl
-  - gawk
-  - git

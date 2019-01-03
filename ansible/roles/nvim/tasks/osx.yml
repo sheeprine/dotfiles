@@ -6,11 +6,5 @@
 
 - name: Install neovim plugins dependencies
   homebrew:
-    name: "{{ item }}"
+    name: "{{ nvim_osx_dependencies }}"
     state: present
-  loop:
-  - git
-  - golang
-  - python-setuptools
-  - python3-setuptools
-  - python3-dev

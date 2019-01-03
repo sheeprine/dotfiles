@@ -1,26 +1,14 @@
 ---
 - name: Debian | Install ranger
   apt:
-    name: "{{ item }}"
+    name: "{{ ranger_debian_packages }}"
     state: present
-  loop:
-  - ranger
-  - atool
-  - caca-utils
-  - w3m-img
-  - highlight
-  - poppler-utils
   when: ansible_os_family == "Debian"
 
 - name: OSX | Install ranger
   homebrew:
-    name: "{{ item }}"
+    name: "{{ ranger_osx_packages }}"
     state: present
-  loop:
-  - ranger
-  - atool
-  - highlight
-  - poppler
   when: ansible_os_family == "Darwin"
 
 - name: Install custom ranger configuration file
