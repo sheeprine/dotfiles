@@ -1,4 +1,19 @@
 ---
+- name: Add neovim PPA for Ubuntu
+  become: true
+  apt_repository:
+    repo: "ppa:neovim-ppa/stable"
+  register: neovim_ppa
+  when: ansible_distribution == "Ubuntu"
+
+- name: Update package list to reflect PPA change
+  become: true
+  apt:
+    update_cache: true
+  when:
+  - ansible_distribution == "Ubuntu"
+  - neovim_ppa is changed
+
 - name: Install/update neovim
   become: true
   apt:
