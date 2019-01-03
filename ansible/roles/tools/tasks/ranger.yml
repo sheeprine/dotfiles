@@ -1,8 +1,8 @@
 ---
-- name: Install ranger
+- name: Debian | Install ranger
   apt:
     name: "{{ item }}"
-    state: latest
+    state: present
   loop:
   - ranger
   - atool
@@ -12,10 +12,10 @@
   - poppler-utils
   when: ansible_os_family == "Debian"
 
-- name: Install ranger
+- name: OSX | Install ranger
   homebrew:
     name: "{{ item }}"
-    state: latest
+    state: present
   loop:
   - ranger
   - atool

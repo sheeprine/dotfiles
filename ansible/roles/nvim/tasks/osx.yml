@@ -1,15 +1,13 @@
 ---
-- name: Install/update neovim
+- name: Install neovim
   homebrew:
-    name: "{{ item }}"
-    state: latest
-  loop:
-  - neovim
+    name: neovim
+    state: present
 
 - name: Install neovim plugins dependencies
   homebrew:
     name: "{{ item }}"
-    state: latest
+    state: present
   loop:
   - git
   - golang

@@ -14,19 +14,17 @@
   - ansible_distribution == "Ubuntu"
   - neovim_ppa is changed
 
-- name: Install/update neovim
+- name: Install neovim
   become: true
   apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-  - neovim
+    name: neovim
+    state: present
 
 - name: Install neovim plugins dependencies
   become: true
   apt:
     name: "{{ item }}"
-    state: latest
+    state: present
   loop:
   - git
   - golang

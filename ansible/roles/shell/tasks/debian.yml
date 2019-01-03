@@ -1,15 +1,15 @@
 ---
-- name: Install/update zsh
+- name: Install zsh
   become: true
   apt:
     name: zsh
-    state: latest
+    state: present
 
 - name: Install zplug dependencies
   become: true
   apt:
     name: "{{ item }}"
-    state: latest
+    state: present
   loop:
   - curl
   - gawk
