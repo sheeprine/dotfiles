@@ -7,7 +7,7 @@ let g:python_host_prog = stdpath('data').'pyvenv/python2'
 let g:python3_host_prog = stdpath('data').'pyvenv/python3'
 
 " Install plugins
-source stdpath('config').'/plugins.vim'
+exe 'source '.stdpath('config').'/plugins.vim'
 
 " autocompletion
 let g:deoplete#enable_at_startup = 1
