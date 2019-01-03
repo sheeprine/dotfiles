@@ -1,5 +1,6 @@
 ---
 - name: Debian | Install ranger
+  become: true
   apt:
     name: "{{ ranger_debian_packages }}"
     state: present
@@ -10,6 +11,11 @@
     name: "{{ ranger_osx_packages }}"
     state: present
   when: ansible_os_family == "Darwin"
+
+- name: Create ranger config directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/ranger/"
+    state: directory
 
 - name: Install custom ranger configuration file
   template:
