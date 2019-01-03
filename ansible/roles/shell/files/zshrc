@@ -33,6 +33,9 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
+# Load fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 autoload -U compinit && compinit
 
 # ESC+BKSPC stop at non alphanumerical (bash style)
