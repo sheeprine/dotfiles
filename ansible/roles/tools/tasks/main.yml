@@ -1,6 +1,7 @@
 ---
 - include_tasks: ranger.yml
 
+  # FIXME(sheeprine): Do more than copying tmux configuration
 - name: Copy tmux configuration
   copy:
     src: "tmux.conf"

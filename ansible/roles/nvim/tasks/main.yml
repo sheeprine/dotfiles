@@ -1,8 +1,10 @@
 ---
-- include_tasks: osx.yml
+- name: Include OSX specific tasks
+  include_tasks: osx.yml
   when: ansible_os_family == "Darwin"
 
-- include_tasks: debian.yml
+- name: Include Debian specific tasks
+  include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
 - name: Create nvim config directory
