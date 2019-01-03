@@ -30,6 +30,6 @@
   copy:
     src: "i3.conf"
     dest: "/etc/lightdm/lightdm.conf.d/"
-    user: "root"
+    owner: "root"
     group: "root"
     mode: 0644
