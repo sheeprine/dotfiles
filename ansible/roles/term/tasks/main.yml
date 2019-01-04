@@ -4,6 +4,10 @@
   when:
   - ansible_os_family != "Darwin"
   - use_rxvt
+- name: Install alacritty
+  include_tasks: alacritty.yml
+  when:
+  - use_alacritty
 
 - name: Get path to default terminal emulator
   command: "which {{ default_term }}"
