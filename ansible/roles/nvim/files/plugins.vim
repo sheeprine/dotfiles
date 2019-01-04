@@ -6,6 +6,7 @@ Plug 'tpope/vim-sensible'
 " Color scheme
 Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized'
+Plug 'morhetz/gruvbox'
 
 " Fuzzy finder
 if has('macunix')
