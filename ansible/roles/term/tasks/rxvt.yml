@@ -10,6 +10,9 @@
     dest: "{{ ansible_env.HOME }}/.Xresources.d/rxvt/{{ item.0 }}"
     force: yes
   loop: "{{ rxvt_themes | dictsort }}"
+  # Disable when checking as ansible will not download and trigger a change
+  # even if it's not.
+  when: not ansible_check_mode
 
 - name: Install rxvt configuration file
   template:
