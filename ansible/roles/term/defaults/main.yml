@@ -6,6 +6,6 @@ rxvt_themes:
   gruvbox-light: "https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/xresources/gruvbox-light.xresources"
   solarized-dark: "https://raw.githubusercontent.com/solarized/xresources/master/Xresources.dark"
   solarized-light: "https://raw.githubusercontent.com/solarized/xresources/master/Xresources.light"
-default_term: "rxvt"
+default_term: "alacritty"
 use_alacritty: true
 alacritty_deb_url: "https://github.com/jwilm/alacritty/releases/download/v0.2.4/Alacritty-v0.2.4_amd64.deb"
