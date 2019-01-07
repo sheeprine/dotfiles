@@ -18,7 +18,7 @@ filetype plugin indent on
 syntax on
 
 " Remap leader to space
-let mapleader = '<Space>'
+let mapleader = "\<Space>"
 
 " No Ex mode
 nnoremap Q <nop>
