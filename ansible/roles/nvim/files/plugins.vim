@@ -23,6 +23,7 @@ else
   " Install it using nvim
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 endif
+Plug 'junegunn/fzf.vim'
 
 " Async Linter
 Plug 'w0rp/ale'

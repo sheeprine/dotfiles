@@ -156,8 +156,10 @@ let g:lightline.active = {
 \ }
 
 " fzf shortcuts
-nnoremap <silent> <Leader>f :FZF<CR>
-nnoremap <silent> <Leader>F :FZF ~<CR>
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <Leader>rg :Rg<CR>
+nnoremap <silent> <Leader>gc :Commits<CR>
 
 " ALE
 let g:ale_fixers = {
