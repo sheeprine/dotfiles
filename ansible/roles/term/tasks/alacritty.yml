@@ -6,39 +6,11 @@
     state: present
   when: ansible_os_family == "Debian"
 
-  # NOTE(sheeprine): the deb parameter from apt is broken as it doesn't
-  # follow redirects and doesn't detect the real filename creating huge file
-  # based on splited url which makes the install fail. So we go back to the
-  # basics
 - name: Debian | Install alacritty from github release
+  include_tasks: "roles/_pkg_install/tasks/debian.yml"
+  vars:
+    pkg_url: "{{ alacritty_deb_url }}"
   when: ansible_os_family == "Debian"
-  block:
-  - name: Create temporary directory for the download
-    tempfile:
-      state: directory
-    register: alacritty_temp
-    changed_when: no
-    check_mode: no
-
-  - name: Get deb package from github
-    get_url:
-      url: "{{ alacritty_deb_url }}"
-      dest: "{{ alacritty_temp.path }}/"
-    changed_when: false
-    check_mode: no
-    register: alacritty_deb
-
-  - name: Install alacritty debian package
-    become: true
-    apt:
-      deb: "{{ alacritty_deb.dest }}"
-      state: present
-  always:
-  - name: Remove temporary directory
-    file:
-      path: "{{ alacritty_temp.path }}"
-      state: absent
-    changed_when: no
 
 - name: OSX | Install alacritty
   homebrew:

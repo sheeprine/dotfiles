@@ -1,0 +1,36 @@
+---
+  # NOTE(sheeprine): the deb parameter from apt is broken as it doesn't
+  # follow redirects and doesn't detect the real filename creating huge file
+  # based on splited url which makes the install fail. So we go back to the
+  # basics
+- name: Debian | Install package from github release
+  when: ansible_os_family == "Debian"
+  block:
+  - name: Create temporary directory for the download
+    tempfile:
+      state: directory
+    register: pkg_tmp
+    changed_when: no
+    check_mode: no
+
+  - name: Get deb package from github
+    get_url:
+      url: "{{ pkg_url }}"
+      dest: "{{ pkg_tmp.path }}/"
+    changed_when: false
+    check_mode: no
+    register: pkg_deb
+
+  - name: Install debian package
+    become: true
+    apt:
+      deb: "{{ pkg_deb.dest }}"
+      state: present
+
+  always:
+  - name: Remove temporary directory
+    file:
+      path: "{{ pkg_tmp.path }}"
+      state: absent
+    changed_when: no
+    check_mode: no
