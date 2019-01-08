@@ -14,6 +14,12 @@
   - ansible_distribution == "Ubuntu"
   - neovim_ppa is changed
 
+- name: Debian | Install ripgrep from github release
+  include_tasks: "roles/_pkg_install/tasks/debian.yml"
+  vars:
+    pkg_url: "{{ ripgrep_deb_pkg }}"
+  when: ansible_os_family == "Debian"
+
 - name: Install neovim
   become: true
   apt:
