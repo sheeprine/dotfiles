@@ -20,8 +20,6 @@ apps_homebrew:
 - highlight
 - gpg2
 - pinentry
-- zsh
-- reattach-to-user-namespace
 
 themes:
   - "https://raw.githubusercontent.com/abeltay/solarized/master/Solarized-Dark.terminal"

@@ -1,6 +1,25 @@
 ---
 - include_tasks: ranger.yml
 
+- name: OSX | Install tmux
+  when: ansible_os_family == "Darwin"
+  homebrew:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - reattach-to-user-namespace
+  - tmux
+
+- name: Debian | Install tmux
+  when: ansible_os_family == "Debian"
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - xsel
+  - tmux
+
   # FIXME(sheeprine): Do more than copying tmux configuration
 - name: Copy tmux configuration
   copy:
