@@ -91,7 +91,8 @@ set formatoptions-=t
 set undofile
 
 " Switch directory to current file
-autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+" NOTE(sheeprine): Disabled as it renders fzf and rg useless
+" autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
 " Make vim quiet (no confirmation)
 set shortmess+=filmnrxoOtT
