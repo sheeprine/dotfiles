@@ -33,9 +33,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-# Load fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 autoload -U compinit && compinit
 
 # ESC+BKSPC stop at non alphanumerical (bash style)
@@ -56,6 +53,9 @@ setopt inc_append_history
 setopt share_history
 
 bindkey -e
+
+# Load fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Locales
 export LC_ALL=en_US.UTF-8
