@@ -1,3 +1,4 @@
 ---
 use_j4: true
 use_vim_bindings: true
+remap_caps_as_escape: true

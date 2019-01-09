@@ -181,3 +181,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+{% if remap_caps_as_escape %}
+exec --no-startup-id "setxkbmap -option caps:escape"
+{% endif %}
