@@ -68,6 +68,6 @@ Plug 'benizi/vim-automkdir'
 
 " Git integration
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 
 call plug#end()
