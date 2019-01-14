@@ -1,0 +1,8 @@
+---
+- name: Clear old neovim plugins
+  command: nvim --headless +PlugClean! +qa
+  listen: "update neovim plugins"
+
+- name: Install neovim plugins
+  command: nvim --headless +PlugInstall +qa
+  listen: "update neovim plugins"

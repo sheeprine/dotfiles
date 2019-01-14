@@ -21,6 +21,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/nvim/"
+  notify: update neovim plugins
   loop:
   - init.vim
   - plugins.vim
@@ -43,9 +44,3 @@
     virtualenv: "{{ nvim_venv_dir }}/{{ item[1] }}"
     virtualenv_python: "{{ item[1] }}"
   loop: "{{ ['pynvim', 'neovim'] | product(['python2', 'python3']) | list }}"
-
-- name: Clear old neovim plugins
-  command: nvim --headless +PlugClean! +qa
-
-- name: Install neovim plugins
-  command: nvim --headless +PlugInstall +qa
