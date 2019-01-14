@@ -45,6 +45,8 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " Python
 Plug 'zchee/deoplete-jedi'
 
+Plug 'majutsushi/tagbar'
+
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'

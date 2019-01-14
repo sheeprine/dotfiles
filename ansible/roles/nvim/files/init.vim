@@ -168,6 +168,9 @@ let g:ale_fixers = {
       \ }
 let g:ale_fix_on_save = 1
 
+" Tagbar
+nnoremap <silent> <Leader>t :TagbarToggle<CR>
+
 " UltiSnips
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
