@@ -45,11 +45,10 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " Python
 Plug 'zchee/deoplete-jedi'
 
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 Plug 'ervandew/supertab'
 
