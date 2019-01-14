@@ -168,6 +168,11 @@ let g:ale_fixers = {
       \ }
 let g:ale_fix_on_save = 1
 
+" SuperTab
+" let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
 " Tagbar
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
