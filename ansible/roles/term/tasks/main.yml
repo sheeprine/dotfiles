@@ -1,4 +1,24 @@
 ---
+- name: OSX | Install terminal fonts
+  block:
+  - name: OSX | Add fonts tap to homebrew
+    homebrew_tap:
+      name: caskroom/fonts
+      state: present
+  - name: OSX | Install fonts
+    homebrew:
+      name: "{{ term_fonts_osx }}"
+      state: present
+  when:
+  - ansible_os_family == "Darwin"
+
+- name: Debian | Install fonts
+  become: true
+  apt:
+    name: "{{ term_fonts_debian }}"
+    state: present
+  when: ansible_os_family == "Debian"
+
 - name: Install rxvt on Linux based systems
   include_tasks: rxvt.yml
   when:

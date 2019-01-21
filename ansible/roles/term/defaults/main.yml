@@ -1,4 +1,8 @@
 ---
+term_fonts_debian:
+- fonts-hack
+term_fonts_osx:
+- font-hack
 use_rxvt: true
 rxvt_theme: "solarized-dark"
 rxvt_themes:

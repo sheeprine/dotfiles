@@ -1,14 +1,10 @@
 ---
-apps_tap:
-- caskroom/fonts
-
 apps_cask:
 - displaycal
 - google-chrome
 - firefox
 - macpass
 - vimr
-- font-hack
 - caskroom/versions/docker-edge
 - tunnelblick
 - openscad
