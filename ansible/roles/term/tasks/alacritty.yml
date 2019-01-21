@@ -1,5 +1,8 @@
 ---
 - name: Debian | Install alacritty dependencies
+  tags:
+  - term
+  - term-alacritty
   become: yes
   apt:
     name: xclip
@@ -7,23 +10,35 @@
   when: ansible_os_family == "Debian"
 
 - name: Debian | Install alacritty from github release
+  tags:
+  - term
+  - term-alacritty
   include_tasks: "roles/_pkg_install/tasks/debian.yml"
   vars:
     pkg_url: "{{ alacritty_deb_url }}"
   when: ansible_os_family == "Debian"
 
 - name: OSX | Install alacritty
+  tags:
+  - term
+  - term-alacritty
   homebrew:
     name: alacritty
     state: present
   when: ansible_os_family == "Darwin"
 
 - name: Create alacritty config directory
+  tags:
+  - term
+  - term-alacritty
   file:
     path: "{{ ansible_env.HOME }}/.config/alacritty/"
     state: directory
 
 - name: Copy alacritty configuration
-  copy:
-    src: alacritty.conf
-    dest: "{{ ansible_env.HOME }}/.config/alacritty/"
+  tags:
+  - term
+  - term-alacritty
+  template:
+    src: alacritty.j2
+    dest: "{{ ansible_env.HOME }}/.config/alacritty/alacritty.yml"
