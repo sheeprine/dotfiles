@@ -17,3 +17,13 @@
     name: alacritty
     state: present
   when: ansible_os_family == "Darwin"
+
+- name: Create alacritty config directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/alacritty/"
+    state: directory
+
+- name: Copy alacritty configuration
+  copy:
+    src: alacritty.conf
+    dest: "{{ ansible_env.HOME }}/.config/alacritty/"
