@@ -74,6 +74,7 @@ if [[ $OSTYPE == darwin* ]]; then
   # Override default macOS python2 install
   export PATH="/usr/local/opt/python@2/bin:$PATH"
 fi
+export PATH="$HOME/.local/bin:$PATH"
 
 # Lazy alias
 alias vim='nvim'
