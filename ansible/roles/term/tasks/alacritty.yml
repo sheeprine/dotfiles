@@ -13,7 +13,7 @@
   tags:
   - term
   - term-alacritty
-  import_tasks: "roles/_pkg_install/tasks/debian.yml"
+  import_tasks: "../../_pkg_install/tasks/debian.yml"
   vars:
     pkg_url: "{{ alacritty_deb_url }}"
   when: ansible_os_family == "Debian"
