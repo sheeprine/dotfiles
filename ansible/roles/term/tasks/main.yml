@@ -45,6 +45,8 @@
 - name: Get path to default terminal emulator
   tags:
   - term
+  - term-alacritty
+  - term-rxvt
   command: "which {{ default_term }}"
   register: term_path
   check_mode: no
@@ -54,6 +56,8 @@
 - name: Set the default terminal emulator
   tags:
   - term
+  - term-alacritty
+  - term-rxvt
   become: yes
   alternatives:
     name: x-terminal-emulator
