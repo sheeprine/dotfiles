@@ -47,8 +47,8 @@ set foldmethod=indent
 " Colorscheme
 set background=dark
 " Detect if coloscheme is installed to avoid error on start
-if index(getcompletion('', 'color'), 'NeoSolarized') >= 0
-  colorscheme NeoSolarized
+if index(getcompletion('', 'color'), '{{ nvim_default_colorscheme }}') >= 0
+  colorscheme {{ nvim_default_colorscheme }}
 endif
 " Enable true colors if available
 if ($COLORTERM=='truecolor')

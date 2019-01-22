@@ -17,13 +17,18 @@
     path: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload"
     state: directory
 
-- name: Copy nvim configuration
+- name: Copy nvim configuration file
+  template:
+    src: "init.vim.j2"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
+  notify: update neovim plugins
+
+- name: Copy other nvim configuration files
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/nvim/"
   notify: update neovim plugins
   loop:
-  - init.vim
   - plugins.vim
 
 - name: Install vim-plug
