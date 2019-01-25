@@ -5,10 +5,15 @@
 - include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- name: Install zplug from sources
-  shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+- name: Remove old zplug install
+  file:
+    path: "{{ ansible_env.HOME }}/.zplug"
+    state: absent
+
+- name: Install zplugin from sources
+  shell: curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh| zsh
   args:
-    creates: "{{ ansible_env.HOME }}/.zplug"
+    creates: "{{ ansible_env.HOME }}/.zplugin"
     warn: false
 
 - name: Create zsh config files
