@@ -6,10 +6,10 @@
   block:
   - name: OSX | Add fonts tap to homebrew
     homebrew_tap:
-      name: caskroom/fonts
+      name: homebrew/cask-fonts
       state: present
   - name: OSX | Install fonts
-    homebrew:
+    homebrew_cask:
       name: "{{ term_fonts_osx }}"
       state: present
   when:
