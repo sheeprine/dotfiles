@@ -8,3 +8,9 @@
   homebrew:
     name: "{{ nvim_osx_dependencies }}"
     state: present
+
+- name: Install virtualenv
+  pip:
+    name: "virtualenv"
+    executable: "pip3"
+    state: present

@@ -16,8 +16,5 @@ nvim_debian_dependencies:
 nvim_osx_dependencies:
 - git
 - golang
-- python-setuptools
-- python3-setuptools
-- python3-dev
 - fzf
 - ripgrep
