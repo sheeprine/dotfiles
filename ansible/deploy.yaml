@@ -7,8 +7,10 @@
   - tools
   tasks:
   - name: Include window manager tasks
-    include_role:
+    import_role:
       name: wm
+    tags:
+      - wm
     when: ansible_os_family == "Debian"
   - name: Include OSX related tasks
     include_role:
