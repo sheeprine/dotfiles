@@ -5,10 +5,10 @@
     name: zsh
     state: present
 
-- name: Install zplug dependencies
+- name: Install zplugin dependencies
   become: true
   apt:
-    name: "{{ zplug_dependencies }}"
+    name: "{{ zplugin_dependencies }}"
     state: present
 
 - name: Install fzf from sources

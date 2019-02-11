@@ -4,9 +4,9 @@
     name: zsh
     state: present
 
-- name: Install zplug dependencies
+- name: Install zplugin dependencies
   homebrew:
-    name: "{{ zplug_dependencies }} + ['fzf']"
+    name: "{{ zplugin_dependencies }} + ['fzf']"
     state: present
 
   # TODO(sheeprine): This is sloppy as it's run every time

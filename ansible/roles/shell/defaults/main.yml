@@ -1,5 +1,5 @@
 ---
-zplug_dependencies:
+zpluging_dependencies:
 - curl
 - gawk
 - git
