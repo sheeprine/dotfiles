@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ansible-playbook -i ansible/hosts -K -D ansible/deploy.yaml
+ansible-playbook -i ansible/hosts -K -D ansible/deploy.yaml "$@"
