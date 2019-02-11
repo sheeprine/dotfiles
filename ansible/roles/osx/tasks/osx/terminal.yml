@@ -6,6 +6,8 @@
         state: directory
         prefix: term-themes
       register: temp_path
+      check_mode: no
+      changed_when: no
 
     - name: Download files
       get_url:
@@ -13,26 +15,33 @@
         dest: "{{ temp_path.path }}"
       loop: "{{ themes }}"
       register: theme_files
+      changed_when: no
 
     - name: Extract theme names
       shell: "plutil -extract name xml1 -o - {{ item.dest }} | plutil -p - | tr -d '\"'"
       loop: "{{ theme_files.results }}"
       register: theme_names
+      check_mode: no
+      changed_when: no
 
     - name: Extract current preferences
       command: "defaults export com.apple.Terminal -"
       register: preferences
+      check_mode: no
+      changed_when: no
 
     - name: Save preferences to file
       copy:
         content: "{{ preferences.stdout }}"
         dest: "{{ temp_path.path }}/term_settings.xml"
+      changed_when: no
 
     - name: Copy merging script
       copy:
         src: files/add_theme.py
         dest: "{{ temp_path.path }}/add_theme.py"
         mode: "0755"
+      changed_when: no
 
     - name: Merge theme in preferences
       command: "{{ temp_path.path }}/add_theme.py {{ temp_path.path }}/term_settings.xml {{ item.1.dest }}"
@@ -60,3 +69,5 @@
       file:
         path: "{{ temp_path.path }}"
         state: absent
+      check_mode: no
+      changed_when: no

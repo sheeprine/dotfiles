@@ -2,6 +2,8 @@
 - name: Check for keyboard remap
   command: defaults -currentHost read NSGlobalDomain
   register: globalprefs
+  check_mode: no
+  changed_when: no
 
 - name: Remap caps lock to escape
   command: >
