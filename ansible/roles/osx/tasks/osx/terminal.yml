@@ -9,14 +9,14 @@
 
     - name: Download files
       get_url:
-        url: "{{ item }}" 
+        url: "{{ item }}"
         dest: "{{ temp_path.path }}"
-      with_items: "{{ themes }}"
+      loop: "{{ themes }}"
       register: theme_files
 
     - name: Extract theme names
       shell: "plutil -extract name xml1 -o - {{ item.dest }} | plutil -p - | tr -d '\"'"
-      with_items: "{{ theme_files.results }}"
+      loop: "{{ theme_files.results }}"
       register: theme_names
 
     - name: Extract current preferences
@@ -37,9 +37,7 @@
     - name: Merge theme in preferences
       command: "{{ temp_path.path }}/add_theme.py {{ temp_path.path }}/term_settings.xml {{ item.1.dest }}"
       # TODO(sheeprine): Add a check in python to see if setting is already installed
-      with_together:
-        - "{{ theme_names.results }}"
-        - "{{ theme_files.results }}"
+      loop: "{{ theme_names.results|zip(theme_files.results)|list }}"
       when: item.0.stdout not in preferences.stdout
       register: merged
 
@@ -52,9 +50,9 @@
         domain: com.apple.Terminal
         key: "{{ item }}"
         value: "{{ default_theme }}"
-      items:
-        - "Default Window Settings"
-        - "Startup Window Settings"
+      loop:
+      - "Default Window Settings"
+      - "Startup Window Settings"
       when: merged.changed
 
   always:

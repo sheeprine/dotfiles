@@ -3,19 +3,15 @@
   homebrew_tap:
     name: "{{ item }}"
     state: present
-  with_items: 
-    - "{{ apps_tap }}"
+  loop: "{{ apps_tap }}"
 
 - name: Install homebrew applications
   homebrew:
-    name: "{{ item }}"
+    name: "{{ apps_homebrew }}"
     state: present
-  with_items: 
-    - "{{ apps_homebrew }}"
 
 - name: Install homebrew cask applications
   homebrew_cask:
     name: "{{ item }}"
     state: present
-  with_items: 
-    - "{{ apps_cask }}"
+  loop: "{{ apps_cask }}"

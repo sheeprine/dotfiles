@@ -5,9 +5,9 @@
     key: "{{ item }}"
     type: bool
     value: true
-  items:
-    - "DSDontWriteNetworkStores"
-    - "DSDontWriteUSBStores"
+  loop:
+  - "DSDontWriteNetworkStores"
+  - "DSDontWriteUSBStores"
 
 - name: Show battery percentage
   osx_defaults:
