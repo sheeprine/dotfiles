@@ -46,6 +46,11 @@
     loop:
     - scope.sh
     - rifle.conf
+  - name: "Ensure ranger scope.sh is executable"
+    file:
+      path: "{{ ansible_env.HOME }}/.config/ranger/scope.sh"
+      mode: "0755"
+
   always:
   - name: Delete ranger temporary directory
     file:
