@@ -20,4 +20,5 @@ apps_homebrew:
 themes:
   - "https://raw.githubusercontent.com/abeltay/solarized/master/Solarized-Dark.terminal"
   - "https://raw.githubusercontent.com/abeltay/solarized/master/Solarized-Light.terminal"
-default_theme: "Solarized-Dark"
+  - "https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/osx-terminal/Gruvbox-dark.terminal"
+default_theme: "Gruvbox-dark"
