@@ -8,6 +8,7 @@
   - i3
   - lightdm
   - autorandr
+  - unclutter
 
 - name: Install j4 dmenu replacement
   become: true
