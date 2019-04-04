@@ -9,6 +9,7 @@
   - lightdm
   - autorandr
   - unclutter
+  - feh
 
 - name: Install j4 dmenu replacement
   become: true
