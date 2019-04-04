@@ -71,4 +71,6 @@ Plug 'benizi/vim-automkdir'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 
+Plug 'meck/ale-platformio'
+
 call plug#end()
