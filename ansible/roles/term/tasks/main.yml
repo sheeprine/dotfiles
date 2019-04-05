@@ -25,6 +25,13 @@
     state: present
   when: ansible_os_family == "Debian"
 
+- name: OSX | Customize terminal.app
+  tags:
+    - term
+    - term-terminal.app
+  include_tasks: terminal.app.yml
+  when: ansible_os_family == "Darwin"
+
 - name: Install rxvt on Linux based systems
   tags:
     - term

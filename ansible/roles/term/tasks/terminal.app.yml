@@ -1,5 +1,5 @@
 ---
-- name: Install solarized terminal.app themes
+- name: Install themes for terminal.app
   block:
     - name: Create temporary directory for Terminal themes
       tempfile:
@@ -13,7 +13,7 @@
       get_url:
         url: "{{ item }}"
         dest: "{{ temp_path.path }}"
-      loop: "{{ themes }}"
+      loop: "{{ terminal.app_themes }}"
       register: theme_files
       changed_when: no
 
@@ -67,7 +67,7 @@
       osx_defaults:
         domain: com.apple.Terminal
         key: "{{ item }}"
-        value: "{{ default_theme }}"
+        value: "{{ terminal.app_theme }}"
       loop:
         - "Default Window Settings"
         - "Startup Window Settings"
