@@ -1,16 +1,16 @@
 ---
 - name: Ensure rxvt xresources.d directory is present
   tags:
-  - term
-  - term-rxvt
+    - term
+    - term-rxvt
   file:
     path: "{{ ansible_env.HOME }}/.Xresources.d/rxvt"
     state: directory
 
 - name: Download rxvt colorschemes
   tags:
-  - term
-  - term-rxvt
+    - term
+    - term-rxvt
   get_url:
     url: "{{ item.1 }}"
     dest: "{{ ansible_env.HOME }}/.Xresources.d/rxvt/{{ item.0 }}"
@@ -22,18 +22,18 @@
 
 - name: Install rxvt configuration file
   tags:
-  - term
-  - term-rxvt
+    - term
+    - term-rxvt
   template:
     src: "rxvt.j2"
     dest: "{{ ansible_env.HOME }}/.Xresources.d/rxvt.xresources"
   notify:
-  - reload xrdb
+    - reload xrdb
 
 - name: Load configuration in Xresources
   tags:
-  - term
-  - term-rxvt
+    - term
+    - term-rxvt
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.Xresources"
     create: yes
@@ -41,8 +41,8 @@
 
 - name: Install rxvt
   tags:
-  - term
-  - term-rxvt
+    - term
+    - term-rxvt
   become: true
   apt:
     name: rxvt-unicode

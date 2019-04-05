@@ -20,5 +20,7 @@
   register: fzf_repo
 
 - name: Install fzf binaries and scripts
-  command: "{{ ansible_env.HOME }}/.fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish"
+  command: >
+    {{ ansible_env.HOME }}/.fzf/install
+    --key-bindings --completion --no-update-rc --no-bash --no-fish
   when: fzf_repo is changed

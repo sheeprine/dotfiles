@@ -29,7 +29,7 @@
     dest: "{{ ansible_env.HOME }}/.config/nvim/"
   notify: update neovim plugins
   loop:
-  - plugins.vim
+    - plugins.vim
 
 - name: Install vim-plug
   get_url:

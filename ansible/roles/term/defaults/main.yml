@@ -1,15 +1,19 @@
 ---
 term_fonts_debian:
-- fonts-hack
+  - fonts-hack
 term_fonts_osx:
-- font-hack
+  - font-hack
 use_rxvt: true
 rxvt_theme: "solarized-dark"
 rxvt_themes:
-  gruvbox-dark: "https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/xresources/gruvbox-dark.xresources"
-  gruvbox-light: "https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/xresources/gruvbox-light.xresources"
-  solarized-dark: "https://raw.githubusercontent.com/solarized/xresources/master/Xresources.dark"
-  solarized-light: "https://raw.githubusercontent.com/solarized/xresources/master/Xresources.light"
+  gruvbox-dark: "https://raw.githubusercontent.com/morhetz/gruvbox-contrib\
+                 /master/xresources/gruvbox-dark.xresources"
+  gruvbox-light: "https://raw.githubusercontent.com/morhetz/gruvbox-contrib\
+                  /master/xresources/gruvbox-light.xresources"
+  solarized-dark: "https://raw.githubusercontent.com/solarized/xresources\
+                   /master/Xresources.dark"
+  solarized-light: "https://raw.githubusercontent.com/solarized/xresources\
+                    /master/Xresources.light"
 default_term: "alacritty"
 use_alacritty: true
 alacritty_deb_url: "https://github.com/jwilm/alacritty"

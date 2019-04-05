@@ -1,24 +1,24 @@
 ---
 - name: OSX | Install terminal fonts
   tags:
-  - term
-  - term-fonts
+    - term
+    - term-fonts
   block:
-  - name: OSX | Add fonts tap to homebrew
-    homebrew_tap:
-      name: homebrew/cask-fonts
-      state: present
-  - name: OSX | Install fonts
-    homebrew_cask:
-      name: "{{ term_fonts_osx }}"
-      state: present
-  when:
-  - ansible_os_family == "Darwin"
+    - name: OSX | Add fonts tap to homebrew
+      homebrew_tap:
+        name: homebrew/cask-fonts
+        state: present
+
+    - name: OSX | Install fonts
+      homebrew_cask:
+        name: "{{ term_fonts_osx }}"
+        state: present
+  when: ansible_os_family == "Darwin"
 
 - name: Debian | Install fonts
   tags:
-  - term
-  - term-fonts
+    - term
+    - term-fonts
   become: true
   apt:
     name: "{{ term_fonts_debian }}"
@@ -27,26 +27,25 @@
 
 - name: Install rxvt on Linux based systems
   tags:
-  - term
-  - term-rxvt
+    - term
+    - term-rxvt
   include_tasks: rxvt.yml
   when:
-  - ansible_os_family != "Darwin"
-  - use_rxvt
+    - ansible_os_family != "Darwin"
+    - use_rxvt
 
 - name: Install alacritty
   tags:
-  - term
-  - term-alacritty
+    - term
+    - term-alacritty
   include_tasks: alacritty.yml
-  when:
-  - use_alacritty
+  when: use_alacritty
 
 - name: Get path to default terminal emulator
   tags:
-  - term
-  - term-alacritty
-  - term-rxvt
+    - term
+    - term-alacritty
+    - term-rxvt
   command: "which {{ default_term }}"
   register: term_path
   check_mode: no
@@ -55,9 +54,9 @@
 
 - name: Set the default terminal emulator
   tags:
-  - term
-  - term-alacritty
-  - term-rxvt
+    - term
+    - term-alacritty
+    - term-rxvt
   become: yes
   alternatives:
     name: x-terminal-emulator

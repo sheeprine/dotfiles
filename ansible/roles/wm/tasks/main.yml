@@ -5,11 +5,11 @@
     name: "{{ item }}"
     state: latest
   loop:
-  - i3
-  - lightdm
-  - autorandr
-  - unclutter
-  - feh
+    - i3
+    - lightdm
+    - autorandr
+    - unclutter
+    - feh
 
 - name: Install j4 dmenu replacement
   become: true

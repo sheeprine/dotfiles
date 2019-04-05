@@ -7,8 +7,8 @@
     name: "{{ item }}"
     state: present
   loop:
-  - reattach-to-user-namespace
-  - tmux
+    - reattach-to-user-namespace
+    - tmux
 
 - name: Debian | Install tmux
   when: ansible_os_family == "Debian"
@@ -17,10 +17,10 @@
     name: "{{ item }}"
     state: present
   loop:
-  - xsel
-  - tmux
+    - xsel
+    - tmux
 
-  # FIXME(sheeprine): Do more than copying tmux configuration
+# FIXME(sheeprine): Do more than copying tmux configuration
 - name: Copy tmux configuration
   copy:
     src: "tmux.conf"

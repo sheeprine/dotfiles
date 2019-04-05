@@ -11,7 +11,10 @@
     state: absent
 
 - name: Install zplugin from sources
-  shell: curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh| zsh
+  shell: >
+    curl -fsSL
+    https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh |
+    zsh
   args:
     creates: "{{ ansible_env.HOME }}/.zplugin"
     warn: false

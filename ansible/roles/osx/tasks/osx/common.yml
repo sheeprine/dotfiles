@@ -6,8 +6,8 @@
     type: bool
     value: true
   loop:
-  - "DSDontWriteNetworkStores"
-  - "DSDontWriteUSBStores"
+    - "DSDontWriteNetworkStores"
+    - "DSDontWriteUSBStores"
 
 - name: Show battery percentage
   osx_defaults:

@@ -1,61 +1,61 @@
 ---
-  # NOTE(sheeprine): the deb parameter from apt is broken as it doesn't
-  # follow redirects. I also doesn't detect the real filename creating huge
-  # file based on splited url which makes the install fail (as the filename is
-  # too long). So we go back to the basics
+# NOTE(sheeprine): the deb parameter from apt is broken as it doesn't
+# follow redirects. I also doesn't detect the real filename creating huge
+# file based on splited url which makes the install fail (as the filename is
+# too long). So we go back to the basics
 - name: Debian | Install package from github release
   when: ansible_os_family == "Debian"
   block:
-  - name: Create temporary directory for the download
-    tempfile:
-      state: directory
-    register: pkg_tmp
-    changed_when: no
-    check_mode: no
+    - name: Create temporary directory for the download
+      tempfile:
+        state: directory
+      register: pkg_tmp
+      changed_when: no
+      check_mode: no
 
-  - name: Download release page
-    uri:
-      url: "{{ pkg_url }}/releases/latest"
-      follow_redirects: true
-      return_content: true
-    register: release_page
-    changed_when: false
-    check_mode: 'no'
-    when: not pkg_url.endswith(".deb")
+    - name: Download release page
+      uri:
+        url: "{{ pkg_url }}/releases/latest"
+        follow_redirects: true
+        return_content: true
+      register: release_page
+      changed_when: false
+      check_mode: 'no'
+      when: not pkg_url.endswith(".deb")
 
-  - name: Find debian package url
-    set_fact:
-      final_pkg_url: >
-        {{ release_page.content |
-        regex_search('".*/releases/download/.*.deb"') |
-        regex_replace('"', '') |
-        regex_replace('^', 'https://github.com') }}
-    changed_when: false
-    when: not pkg_url.endswith(".deb")
+    - name: Find debian package url
+      set_fact:
+        final_pkg_url: >
+          {{ release_page.content |
+          regex_search('".*/releases/download/.*.deb"') |
+          regex_replace('"', '') |
+          regex_replace('^', 'https://github.com') }}
+      changed_when: false
+      when: not pkg_url.endswith(".deb")
 
-  - name: Use package url as is
-    set_fact:
-      final_pkg_url: "{{ pkg_url }}"
-    when: pkg_url.endswith(".deb")
+    - name: Use package url as is
+      set_fact:
+        final_pkg_url: "{{ pkg_url }}"
+      when: pkg_url.endswith(".deb")
 
-  - name: Get deb package from github
-    get_url:
-      url: "{{ final_pkg_url }}"
-      dest: "{{ pkg_tmp.path }}/"
-    changed_when: false
-    check_mode: no
-    register: pkg_deb
+    - name: Get deb package from github
+      get_url:
+        url: "{{ final_pkg_url }}"
+        dest: "{{ pkg_tmp.path }}/"
+      changed_when: false
+      check_mode: no
+      register: pkg_deb
 
-  - name: Install debian package
-    become: true
-    apt:
-      deb: "{{ pkg_deb.dest }}"
-      state: present
+    - name: Install debian package
+      become: true
+      apt:
+        deb: "{{ pkg_deb.dest }}"
+        state: present
 
   always:
-  - name: Remove temporary directory
-    file:
-      path: "{{ pkg_tmp.path }}"
-      state: absent
-    changed_when: no
-    check_mode: no
+    - name: Remove temporary directory
+      file:
+        path: "{{ pkg_tmp.path }}"
+        state: absent
+      changed_when: no
+      check_mode: no

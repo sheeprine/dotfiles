@@ -11,8 +11,8 @@
 
 - name: Debian | Install alacritty from github release
   tags:
-  - term
-  - term-alacritty
+    - term
+    - term-alacritty
   import_tasks: "../../_pkg_install/tasks/debian.yml"
   vars:
     pkg_url: "{{ alacritty_deb_url }}"
@@ -20,8 +20,8 @@
 
 - name: OSX | Install alacritty
   tags:
-  - term
-  - term-alacritty
+    - term
+    - term-alacritty
   homebrew_cask:
     name: alacritty
     state: present
@@ -29,16 +29,16 @@
 
 - name: Create alacritty config directory
   tags:
-  - term
-  - term-alacritty
+    - term
+    - term-alacritty
   file:
     path: "{{ ansible_env.HOME }}/.config/alacritty/"
     state: directory
 
 - name: Copy alacritty configuration
   tags:
-  - term
-  - term-alacritty
+    - term
+    - term-alacritty
   template:
     src: alacritty.j2
     dest: "{{ ansible_env.HOME }}/.config/alacritty/alacritty.yml"

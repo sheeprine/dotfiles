@@ -7,10 +7,12 @@
 
 - name: Remap caps lock to escape
   command: >
-    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.1452-630-0" -dict
+    defaults -currentHost write NSGlobalDomain
+    "com.apple.keyboard.modifiermapping.1452-630-0" -dict
     HIDKeyboardModifierMappingDst 30064771113
     HIDKeyboardModifierMappingSrc 30064771129
-  when: '"com.apple.keyboard.modifiermapping.1452-630-0" not in globalprefs.stdout'
+  when: >
+    "com.apple.keyboard.modifiermapping.1452-630-0" not in globalprefs.stdout
 
 - name: Set F-Keys as default
   osx_defaults:
