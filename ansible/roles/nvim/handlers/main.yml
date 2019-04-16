@@ -3,6 +3,6 @@
   command: nvim --headless +PlugClean! +qa
   listen: "update neovim plugins"
 
-- name: Install neovim plugins
-  command: nvim --headless +PlugInstall +qa
+- name: Install/Update neovim plugins
+  command: nvim --headless +PlugUpdate +qa
   listen: "update neovim plugins"
