@@ -182,3 +182,6 @@ nnoremap <silent> <Leader>t :TagbarToggle<CR>
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+
+" Move gutentags cache outside of project directory
+let g:gutentags_cache_dir = stdpath('data').'/tags'
