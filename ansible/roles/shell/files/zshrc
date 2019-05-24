@@ -29,7 +29,8 @@ fi
 zplugin ice pick"async.zsh" src"pure.zsh" compile"(pure|async).zsh"
 zplugin light sindresorhus/pure
 
-autoload -U compinit && compinit
+zplugin ice wait"0" lucid atinit"zpcompinit; zpcdreplay"
+zplugin load zdharma/fast-syntax-highlighting
 
 # ESC+BKSPC stop at non alphanumerical (bash style)
 autoload -U select-word-style
