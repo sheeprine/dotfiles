@@ -24,6 +24,16 @@
     src: zshrc
     dest: "{{ ansible_env.HOME }}/.zshrc"
 
+- name: Create zsh custom plugins directories
+  file:
+    path: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---gitshift/"
+    state: directory
+
+- name: Add custom plugins
+  copy:
+    src: "gitshift.plugin.zsh"
+    dest: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---gitshift/"
+
 - name: Detect zsh path
   command: which zsh
   register: zsh_path

@@ -25,6 +25,9 @@ if [[ $OSTYPE == darwin* ]]; then
   zplugin snippet OMZ::plugins/osx/osx.plugin.zsh
 fi
 
+zplugin ice wait"0" lucid
+zplugin load _local/gitshift
+
 # Theme
 zplugin ice pick"async.zsh" src"pure.zsh" compile"(pure|async).zsh"
 zplugin light sindresorhus/pure
