@@ -6,5 +6,9 @@ if [ $OS = "Darwin" ]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew install ansible
 else
-  sudo apt update && sudo apt install -y ansible
+  if [ $(which yum) ]; then
+    sudo yum update && sudo yum install -y ansible
+  elif [ $(which apt) ]; then
+    sudo apt update && sudo apt install -y ansible
+  fi
 fi
