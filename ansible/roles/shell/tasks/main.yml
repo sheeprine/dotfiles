@@ -26,13 +26,15 @@
 
 - name: Create zsh custom plugins directories
   file:
-    path: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---gitshift/"
+    path: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---{{ item.path[:-11] }}"
     state: directory
+  loop: "{{ q('filetree', 'files/zplugin/') }}"
 
-- name: Add custom plugins
+- name: Copy custom plugins
   copy:
-    src: "gitshift.plugin.zsh"
-    dest: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---gitshift/"
+    src: "{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---{{ item.path[:-11] }}/"
+  loop: "{{ q('filetree', 'files/zplugin/') }}"
 
 - name: Detect zsh path
   command: which zsh
