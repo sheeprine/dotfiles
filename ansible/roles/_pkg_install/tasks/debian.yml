@@ -23,9 +23,11 @@
       check_mode: 'no'
       when: not pkg_url.endswith(".deb")
 
+      # TODO(sheeprine): Fail and show a message when no deb package is found
+      # on the release page.
     - name: Find debian package url
       set_fact:
-        final_pkg_url: >
+        final_pkg_url: >-
           {{ release_page.content |
           regex_search('".*/releases/download/.*.deb"') |
           regex_replace('"', '') |
