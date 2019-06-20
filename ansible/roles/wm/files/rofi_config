@@ -1,0 +1,3 @@
+rofi.modi: window,drun,run,ssh,combi
+rofi.combi-modi: window,drun
+rofi.theme: gruvbox-dark

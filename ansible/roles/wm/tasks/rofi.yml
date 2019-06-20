@@ -1,0 +1,24 @@
+---
+- name: "Install rofi dmenu replacement"
+  become: true
+  apt:
+    name:
+      - rofi
+      - xdotool
+    state: latest
+
+- name: "Create rofi configuration directory"
+  file:
+    path: "{{ ansible_env.HOME }}/.config/rofi"
+    state: directory
+
+- name: "Copy rofi configuration"
+  copy:
+    src: "rofi_config"
+    dest: "{{ ansible_env.HOME }}/.config/rofi/config"
+
+- name: "Download gopass integration for rofi"
+  get_url:
+    url: "{{ rofi_gopass }}"
+    dest: "{{ ansible_env.HOME }}/.local/bin/"
+    mode: "0755"

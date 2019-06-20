@@ -18,10 +18,21 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec --no-startup-id {% if use_j4 %}j4-dmenu-desktop{% else %}i3-dmenu-desktop{% endif %}
+{% if use_rofi %}
+set $menu rofi -show combi
+set $menu_raw rofi -show run
+{% else %}
+set $menu {% if use_j4 %}j4-dmenu-desktop{% else %}i3-dmenu-desktop{% endif %}
 
-# start dmenu (a program launcher)
-bindsym $mod+Shift+d exec dmenu_run
+set $menu_raw {% if use_j4 %}j4-dmenu-desktop{% else %}i3-dmenu-desktop{% endif %} --dmenu="dmenu_run -i"
+{% endif %}
+
+bindsym $mod+d exec --no-startup-id $menu
+bindsym $mod+Shift+d exec --no-startup-id $menu_raw
+{% if use_rofi %}
+bindsym $mod+Shift+w exec --no-startup-id rofi -show window
+bindsym $mod+Shift+s exec --no-startup-id {{ ansible_env.HOME }}/.local/bin/rofi-gopass.sh
+{% endif %}
 
 # change focus
 {% if use_vim_bindings %}

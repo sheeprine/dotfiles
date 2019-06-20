@@ -11,12 +11,18 @@
       - feh
     state: latest
 
+- name: "Install rofi related config and packages"
+  import_tasks: "rofi.yml"
+  when: use_rofi
+
 - name: Install j4 dmenu replacement
   become: true
   apt:
     name: "j4-dmenu-desktop"
     state: latest
-  when: use_j4
+  when:
+    - use_j4
+    - not use_rofi
 
 - name: Create i3 configuration directory
   file:
