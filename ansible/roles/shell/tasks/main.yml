@@ -54,3 +54,8 @@
   user:
     name: "{{ ansible_user_id }}"
     shell: "{{ zsh_path.stdout }}"
+
+- name: "Create local binary directory"
+  file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
