@@ -36,3 +36,12 @@
     owner: "root"
     group: "root"
     mode: 0644
+
+- name: "Set keyboard layout"
+  become: true
+  debconf:
+    name: "keyboard-configuration"
+    question: "keyboard-configuration/{{ item.question }}"
+    vtype: "{{ item.vtype }}"
+    value: "{{ item.value }}"
+  loop: "{{ keyboard_layout }}"
