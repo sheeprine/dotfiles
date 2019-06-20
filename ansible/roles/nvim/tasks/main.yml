@@ -21,13 +21,13 @@
   template:
     src: "init.vim.j2"
     dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
-  notify: update neovim plugins
+  notify: "update neovim plugins"
 
 - name: Copy other nvim configuration files
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/nvim/"
-  notify: update neovim plugins
+  notify: "update neovim plugins"
   loop:
     - plugins.vim
 
