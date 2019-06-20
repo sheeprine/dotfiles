@@ -201,6 +201,14 @@ bar {
         status_command i3status
 }
 
+# Audio control
+set $pa_sink 0
+set $volumestep 5
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $pa_sink +$volumestep%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume $pa_sink -$volumestep%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+
 {% if remap_caps_as_escape %}
 exec --no-startup-id "setxkbmap -option caps:escape"
 {% endif %}
