@@ -12,3 +12,4 @@ ranger_osx_packages:
   - atool
   - highlight
   - poppler
+gopass_deb_pkg: "https://github.com/gopasspw/gopass"

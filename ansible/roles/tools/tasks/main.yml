@@ -20,6 +20,18 @@
     - xsel
     - tmux
 
+- name: "OSX | Install gopass as a passwordstore alternative"
+  homebrew:
+    name: "gopass"
+    state: present
+  when: ansible_os_family == "Darwin"
+
+- name: "Debian | Install gopass as a passwordstore alternative"
+  include_tasks: "../../_pkg_install/tasks/debian.yml"
+  vars:
+    pkg_url: "{{ gopass_deb_pkg }}"
+  when: ansible_os_family == "Debian"
+
 # FIXME(sheeprine): Do more than copying tmux configuration
 - name: Copy tmux configuration
   copy:
