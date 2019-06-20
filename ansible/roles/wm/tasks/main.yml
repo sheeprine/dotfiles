@@ -2,14 +2,14 @@
 - name: Install desktop environment
   become: true
   apt:
-    name: "{{ item }}"
+    name:
+      - i3
+      - lightdm
+      - autorandr
+      - arandr
+      - unclutter
+      - feh
     state: latest
-  loop:
-    - i3
-    - lightdm
-    - autorandr
-    - unclutter
-    - feh
 
 - name: Install j4 dmenu replacement
   become: true
