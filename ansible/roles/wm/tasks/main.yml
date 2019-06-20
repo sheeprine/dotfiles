@@ -37,6 +37,20 @@
     group: "root"
     mode: 0644
 
+- name: "Enable lightdm"
+  become: true
+  systemd:
+    name: "lightdm"
+    enabled: true
+
+- name: "Set lightdm as default DM"
+  become: true
+  debconf:
+    name: "lightdm"
+    question: "shared/default-x-display-manager"
+    vtype: "select"
+    value: "lightdm"
+
 - name: "Set keyboard layout"
   become: true
   debconf:
