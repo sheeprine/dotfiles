@@ -6,3 +6,7 @@
 - name: Install/Update neovim plugins
   command: nvim --headless +PlugUpdate +qa
   listen: "update neovim plugins"
+
+- name: Update neovim remote plugins
+  command: nvim --headless +UpdateRemotePlugins +qa
+  listen: "update neovim plugins"

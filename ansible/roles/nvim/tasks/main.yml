@@ -41,6 +41,15 @@
     path: "{{ nvim_venv_dir }}"
     state: directory
 
+- name: Check if virtualenv is valid and purge if needed
+  shell: >-
+    {{ nvim_venv_dir }}/{{ item }}/bin/python --version ||
+    rm -r {{ nvim_venv_dir }}/{{ item }}
+  failed_when: false
+  loop:
+    - 'python2'
+    - 'python3'
+
 - name: Install neovim python bindings in a dedicated virtualenv
   # NOTE(sheeprine): neovim is used for backward compatibility and will be
   # removed soon.
@@ -49,6 +58,7 @@
     virtualenv: "{{ nvim_venv_dir }}/{{ item[1] }}"
     virtualenv_python: "{{ item[1] }}"
   loop: "{{ ['pynvim', 'neovim'] | product(['python2', 'python3']) | list }}"
+  notify: "update neovim plugins"
 
 - name: Create cleanup jobs for nvim caches
   cron:
