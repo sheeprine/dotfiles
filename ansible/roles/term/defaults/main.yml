@@ -20,11 +20,12 @@ alacritty_deb_url: "https://github.com/jwilm/alacritty/releases/download\
                     /v0.3.2/Alacritty-v0.3.2-ubuntu_18_04_amd64.deb"
 alacritty_theme: "Tomorrow Night Bright"
 alacritty_theme_variant: ""
-terminal.app_themes:
-  - "https://raw.githubusercontent.com/abeltay/solarized\
-     /master/Solarized-Dark.terminal"
-  - "https://raw.githubusercontent.com/abeltay/solarized\
-     /master/Solarized-Light.terminal"
-  - "https://raw.githubusercontent.com/morhetz/gruvbox-contrib\
-     /master/osx-terminal/Gruvbox-dark.terminal"
-terminal.app_theme: "Gruvbox-dark"
+terminal:
+  app_themes:
+    - "https://raw.githubusercontent.com/abeltay/solarized\
+       /master/Solarized-Dark.terminal"
+    - "https://raw.githubusercontent.com/abeltay/solarized\
+       /master/Solarized-Light.terminal"
+    - "https://raw.githubusercontent.com/morhetz/gruvbox-contrib\
+       /master/osx-terminal/Gruvbox-dark.terminal"
+  app_theme: "Gruvbox-dark"
