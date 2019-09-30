@@ -46,6 +46,7 @@
     {{ nvim_venv_dir }}/{{ item }}/bin/python --version ||
     rm -r {{ nvim_venv_dir }}/{{ item }}
   failed_when: false
+  changed_when: false
   loop:
     - 'python2'
     - 'python3'
