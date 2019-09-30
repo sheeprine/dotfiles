@@ -17,7 +17,7 @@ rxvt_themes:
 default_term: "alacritty"
 use_alacritty: true
 alacritty_deb_url: "https://github.com/jwilm/alacritty/releases/download\
-                    /v0.3.2/Alacritty-v0.3.2-ubuntu_18_04_amd64.deb"
+                    /v0.3.3/Alacritty-v0.3.3-ubuntu_18_04_amd64.deb"
 alacritty_theme: "Tomorrow Night Bright"
 alacritty_theme_variant: ""
 terminal:
