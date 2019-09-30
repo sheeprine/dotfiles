@@ -5,22 +5,5 @@ rofi_gopass: "https://raw.githubusercontent.com/Algram/rofi-gopass/\
 use_j4: false
 use_vim_bindings: true
 remap_caps_as_escape: true
-keyboard_layout:
-  - question: "model"
-    vtype: "select"
-    value: "Generic 105-key PC (intl.)"
-  - question: "modelcode"
-    vtype: "string"
-    value: "pc105"
-  - question: "layout"
-    vtype: "select"
-    value: "English (US)"
-  - question: "layoutcode"
-    vtype: "string"
-    value: "us"
-  - question: "variant"
-    vtype: "select"
-    value: "English (US) - English (US, intl., with dead keys)"
-  - question: "variantcode"
-    vtype: "string"
-    value: "intl"
+keyboard_layout: "us"
+keyboard_variant: "intl"

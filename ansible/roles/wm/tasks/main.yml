@@ -59,9 +59,7 @@
 
 - name: "Set keyboard layout"
   become: true
-  debconf:
-    name: "keyboard-configuration"
-    question: "keyboard-configuration/{{ item.question }}"
-    vtype: "{{ item.vtype }}"
-    value: "{{ item.value }}"
-  loop: "{{ keyboard_layout }}"
+  template:
+    src: "keyboard.j2"
+    dest: "/etc/default/keyboard"
+  notify: "reconfigure keyboard"
