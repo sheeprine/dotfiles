@@ -70,6 +70,10 @@ export GIT_EDITOR=$EDITOR
 # Paths
 export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
+if [[ -x /usr/local/opt/python@3.9/bin/python ]]; then
+  # Python 3.9
+  export PATH="/usr/local/opt/python@3.9/bin:$PATH"
+fi
 if [[ $OSTYPE == darwin* ]]; then
   # Override default macOS python2 install
   export PATH="/usr/local/opt/python@2/bin:$PATH"
