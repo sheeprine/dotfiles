@@ -64,6 +64,6 @@
 - name: Create cleanup jobs for nvim caches
   cron:
     name: "nvim clean tags not modified since 15 days"
-    minute: 0
+    minute: "0"
     user: "{{ ansible_user }}"
     job: "find {{ ansible_env.HOME }}/.local/share/nvim/tags -mtime +15 -delete"
