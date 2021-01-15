@@ -60,6 +60,8 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " OpenSCAD syntax highlighting
 Plug 'sirtaj/vim-openscad'
+" GCode syntax highlighting
+Plug 'wilriker/gcode.vim'
 
 " Auto create dir on save
 Plug 'benizi/vim-automkdir'
