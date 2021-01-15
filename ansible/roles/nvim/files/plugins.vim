@@ -57,6 +57,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'janko/vim-test'
 
 " OpenSCAD syntax highlighting
 Plug 'sirtaj/vim-openscad'
