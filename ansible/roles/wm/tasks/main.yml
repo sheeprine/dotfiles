@@ -74,6 +74,13 @@
     name: "lightdm"
     enabled: true
 
+- name: "Set greeter theme as litarvan"
+  become: true
+  lineinfile:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    regexp: "webkit_theme\\s+=.*"
+    line: "webkit_theme        = litarvan"
+
 - name: "Set lightdm as default DM"
   become: true
   debconf:
