@@ -1,13 +1,13 @@
 ---
 - name: Install zsh
   become: true
-  apt:
+  package:
     name: zsh
     state: present
 
 - name: Install zplugin dependencies
   become: true
-  apt:
+  package:
     name: "{{ zplugin_dependencies }}"
     state: present
 
@@ -23,4 +23,5 @@
   command: >
     {{ ansible_env.HOME }}/.fzf/install
     --key-bindings --completion --no-update-rc --no-bash --no-fish
-  when: fzf_repo is changed
+  args:
+    creates: '{{ fzf_repo is changed|ternary(omit, ansible_env.HOME + "/.fzf.zsh") }}'

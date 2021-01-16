@@ -1,13 +1,13 @@
 ---
-- name: Debian | Install alacritty dependencies
+- name: Linux | Install alacritty dependencies
   tags:
   - term
   - term-alacritty
   become: yes
-  apt:
+  package:
     name: xclip
     state: present
-  when: ansible_os_family == "Debian"
+  when: ansible_system == "Linux"
 
 - name: Debian | Install alacritty from github release
   tags:
@@ -17,6 +17,16 @@
   vars:
     pkg_url: "{{ alacritty_deb_url }}"
   when: ansible_os_family == "Debian"
+
+- name: Arch Linux | Install alacritty
+  tags:
+  - term
+  - term-alacritty
+  become: yes
+  package:
+    name: alacritty
+    state: present
+  when: ansible_os_family == "Archlinux"
 
 - name: OSX | Install alacritty
   tags:

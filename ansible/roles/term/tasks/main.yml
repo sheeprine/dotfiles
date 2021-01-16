@@ -20,10 +20,20 @@
     - term
     - term-fonts
   become: true
-  apt:
+  package:
     name: "{{ term_fonts_debian }}"
     state: present
   when: ansible_os_family == "Debian"
+
+- name: ArchLinux | Install fonts
+  tags:
+    - term
+    - term-fonts
+  become: true
+  package:
+    name: "{{ term_fonts_archlinux }}"
+    state: present
+  when: ansible_os_family == "Archlinux"
 
 - name: OSX | Customize terminal.app
   tags:
@@ -38,7 +48,7 @@
     - term-rxvt
   include_tasks: rxvt.yml
   when:
-    - ansible_os_family != "Darwin"
+    - ansible_system == "Linux"
     - use_rxvt
 
 - name: Install alacritty
@@ -57,7 +67,7 @@
   register: term_path
   check_mode: no
   changed_when: no
-  when: ansible_os_family == "Debian"
+  when: ansible_system == "Linux"
 
 - name: Set the default terminal emulator
   tags:

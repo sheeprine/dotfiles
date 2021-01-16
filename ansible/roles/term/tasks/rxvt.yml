@@ -44,6 +44,6 @@
     - term
     - term-rxvt
   become: true
-  apt:
+  package:
     name: rxvt-unicode
     state: present

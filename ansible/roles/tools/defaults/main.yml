@@ -7,6 +7,14 @@ ranger_debian_packages:
   - w3m-img
   - highlight
   - poppler-utils
+ranger_arch_packages:
+  - ranger
+  - atool
+  - libcaca
+  - mediainfo
+  - w3m
+  - highlight
+  - poppler
 ranger_osx_packages:
   - ranger
   - atool

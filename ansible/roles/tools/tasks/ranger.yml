@@ -6,6 +6,13 @@
     state: present
   when: ansible_os_family == "Debian"
 
+- name: Arch Linux | Install ranger
+  become: true
+  package:
+    name: "{{ ranger_arch_packages }}"
+    state: present
+  when: ansible_os_family == "Archlinux"
+
 - name: OSX | Install ranger
   homebrew:
     name: "{{ ranger_osx_packages }}"

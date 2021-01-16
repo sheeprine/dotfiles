@@ -1,7 +1,7 @@
 ---
 - include_tasks: ranger.yml
 
-- name: OSX | Install tmux
+- name: "OSX | Install tmux"
   when: ansible_os_family == "Darwin"
   homebrew:
     name: "{{ item }}"
@@ -10,15 +10,14 @@
     - reattach-to-user-namespace
     - tmux
 
-- name: Debian | Install tmux
-  when: ansible_os_family == "Debian"
+- name: "Linux | Install tmux"
+  when: ansible_system == "Linux"
   become: true
-  apt:
-    name: "{{ item }}"
+  package:
+    name:
+      - xsel
+      - tmux
     state: present
-  loop:
-    - xsel
-    - tmux
 
 - name: "OSX | Install gopass as a passwordstore alternative"
   homebrew:
@@ -31,6 +30,13 @@
   vars:
     pkg_url: "{{ gopass_deb_pkg }}"
   when: ansible_os_family == "Debian"
+
+- name: "Arch Linux | Install gopass as a passwordstore alternative"
+  become: true
+  package:
+    name: "gopass"
+    state: present
+  when: ansible_os_family == "Archlinux"
 
 # FIXME(sheeprine): Do more than copying tmux configuration
 - name: Copy tmux configuration

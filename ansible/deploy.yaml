@@ -11,7 +11,7 @@
       name: wm
     tags:
       - wm
-    when: ansible_os_family == "Debian"
+    when: ansible_system == "Linux"
   - name: Include OSX related tasks
     include_role:
       name: osx

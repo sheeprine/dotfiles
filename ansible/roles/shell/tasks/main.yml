@@ -2,8 +2,8 @@
 - include_tasks: osx.yml
   when: ansible_os_family == "Darwin"
 
-- include_tasks: debian.yml
-  when: ansible_os_family == "Debian"
+- include_tasks: linux.yml
+  when: ansible_system == "Linux"
 
 - name: Remove old zplug install
   file:

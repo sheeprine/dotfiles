@@ -7,6 +7,10 @@
   include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
+- name: Include Arch Linux specific tasks
+  include_tasks: arch.yml
+  when: ansible_os_family == "Archlinux"
+
 - name: Create nvim config directory
   file:
     path: "{{ ansible_env.HOME }}/.config/nvim/"
@@ -67,3 +71,31 @@
     minute: "0"
     user: "{{ ansible_user }}"
     job: "find {{ ansible_env.HOME }}/.local/share/nvim/tags -mtime +15 -delete"
+  when: ansible_os_family != "Archlinux"
+
+- name: Create systemd user folder
+  file:
+    path: "{{ ansible_env.HOME }}/.config/systemd/user/"
+    state: directory
+  when: ansible_os_family == "Archlinux"
+
+- name: Create cleanup jobs for nvim caches
+  copy:
+    src: "nvim_cleanup.timer"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/"
+  when: ansible_os_family == "Archlinux"
+
+- name: Create cleanup jobs timer for nvim caches
+  template:
+    src: "nvim_cleanup.service.j2"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/nvim_cleanup.service"
+  when: ansible_os_family == "Archlinux"
+
+- name: Enable and start cleanup jobs timer
+  systemd:
+    name: "nvim_cleanup.timer"
+    daemon_reload: true
+    enabled: true
+    scope: "user"
+    state: "started"
+  when: ansible_os_family == "Archlinux"

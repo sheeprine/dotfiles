@@ -1,7 +1,7 @@
 ---
-- name: Install desktop environment
+- name: Debian | Install desktop environment
   become: true
-  apt:
+  package:
     name:
       - i3
       - lightdm
@@ -10,6 +10,30 @@
       - unclutter
       - feh
     state: latest
+  when: ansible_os_family == "Debian"
+
+- name: Arch Linux | Install desktop environment
+  become: true
+  package:
+    name:
+      - xorg
+      - mesa
+      - lightdm
+      - lightdm-webkit-theme-litarvan
+      - pulseaudio
+      - i3
+      - autorandr
+      - arandr
+      - unclutter
+      - feh
+      - noto-fonts
+      - noto-fonts-cjk
+      - noto-fonts-emoji
+      - libva-intel-driver
+      - pacman-contrib
+      - firefox
+    state: latest
+  when: ansible_os_family == "Archlinux"
 
 - name: "Install rofi related config and packages"
   import_tasks: "rofi.yml"
@@ -17,12 +41,13 @@
 
 - name: Install j4 dmenu replacement
   become: true
-  apt:
+  package:
     name: "j4-dmenu-desktop"
     state: latest
   when:
     - use_j4
     - not use_rofi
+    - ansible_os_family == "Debian"
 
 - name: Create i3 configuration directory
   file:
@@ -56,6 +81,7 @@
     question: "shared/default-x-display-manager"
     vtype: "select"
     value: "lightdm"
+  when: ansible_os_family == "Debian"
 
 - name: "Set keyboard layout"
   become: true
@@ -63,3 +89,4 @@
     src: "keyboard.j2"
     dest: "/etc/default/keyboard"
   notify: "reconfigure keyboard"
+  when: ansible_os_family == "Debian"

@@ -1,7 +1,7 @@
 ---
 - name: "Install rofi dmenu replacement"
   become: true
-  apt:
+  package:
     name:
       - rofi
       - xdotool

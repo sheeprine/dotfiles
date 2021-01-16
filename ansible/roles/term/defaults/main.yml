@@ -1,6 +1,8 @@
 ---
 term_fonts_debian:
   - fonts-hack
+term_fonts_archlinux:
+  - ttf-hack
 term_fonts_osx:
   - font-hack
 use_rxvt: true
