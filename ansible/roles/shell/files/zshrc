@@ -57,6 +57,9 @@ bindkey -e
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Change ~ color to green when shell nested in ranger
+[ -n "$RANGER_LEVEL" ] && zstyle :prompt:pure:path color green
+
 # Locales
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
