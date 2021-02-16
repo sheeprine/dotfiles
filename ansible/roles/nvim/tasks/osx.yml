@@ -2,7 +2,7 @@
 - name: Install neovim
   homebrew:
     name: neovim
-    state: present
+    state: head
 
 - name: Install neovim plugins dependencies
   homebrew:
