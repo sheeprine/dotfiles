@@ -1,12 +1,3 @@
 ---
-- name: Clear old neovim plugins
-  command: nvim --headless +PlugClean! +qa
-  listen: "update neovim plugins"
-
-- name: Install/Update neovim plugins
-  command: nvim --headless +PlugUpdate +qa
-  listen: "update neovim plugins"
-
-- name: Update neovim remote plugins
-  command: nvim --headless +UpdateRemotePlugins +qa
+- include_tasks: "update_plugins.yml"
   listen: "update neovim plugins"
