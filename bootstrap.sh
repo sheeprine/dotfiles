@@ -2,8 +2,9 @@
 
 OS=$(uname)
 if [ $OS = "Darwin" ]; then
+  set -e
   test -x /usr/local/bin/brew || \
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   brew install ansible
 else
   if [ $(which yum) ]; then
