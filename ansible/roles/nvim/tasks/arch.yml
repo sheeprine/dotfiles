@@ -4,6 +4,10 @@
   package:
     name: neovim
     state: present
+  when: false
+
+- name: Install neovim appimage
+  include_tasks: "appimage.yml"
 
 - name: Install neovim plugins dependencies
   become: true

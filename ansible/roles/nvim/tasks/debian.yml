@@ -2,7 +2,7 @@
 - name: Add neovim PPA for Ubuntu
   become: true
   apt_repository:
-    repo: "ppa:neovim-ppa/stable"
+    repo: "ppa:neovim-ppa/unstable"
   register: neovim_ppa
   when: ansible_distribution == "Ubuntu"
 
@@ -13,6 +13,12 @@
   when:
     - ansible_distribution == "Ubuntu"
     - neovim_ppa is changed
+
+- name: Debian | Install neovim appimage
+  include_tasks: "appimage.yml"
+  when:
+    - ansible_distribution != "Ubuntu"
+    - ansible_os_family == "Debian"
 
 - name: Debian | Install ripgrep from github release
   include_tasks: "../../_pkg_install/tasks/debian.yml"
@@ -25,6 +31,7 @@
   apt:
     name: neovim
     state: present
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install neovim plugins dependencies
   become: true

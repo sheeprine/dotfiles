@@ -1,0 +1,6 @@
+---
+
+- name: "Install neovim from github nightly release"
+  include_tasks: "../../_pkg_install/tasks/appimage.yml"
+  vars:
+    pkg_url: "{{ neovim_pkg }}"
