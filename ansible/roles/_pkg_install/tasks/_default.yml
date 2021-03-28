@@ -1,0 +1,16 @@
+---
+
+- name: "Create destination binary directory"
+  file:
+    path: "{{ pkg_dest_dir }}"
+    state: directory
+
+- name: "Install application to destination directory"
+  copy:
+    src: "{{ pkg_file.dest }}"
+    dest: >-
+      {{ pkg_dest_dir }}/{{
+        pkg_file.dest
+        | basename
+        | replace(pkg_extension, '') }}
+    remote_src: true

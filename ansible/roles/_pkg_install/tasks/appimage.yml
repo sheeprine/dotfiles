@@ -1,0 +1,7 @@
+---
+
+- name: "Install appimage package from github release"
+  include_tasks: "install.yml"
+  vars:
+    pkg_extension: ".appimage"
+    pkg_extension: "_default.yml"

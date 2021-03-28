@@ -1,0 +1,8 @@
+---
+
+- name: Install debian package
+  become: true
+  apt:
+    deb: "{{ pkg_file.dest }}"
+    state: present
+  when: ansible_os_family == "Debian"

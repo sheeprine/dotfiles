@@ -1,0 +1,38 @@
+---
+
+- name: Install package from github release
+  block:
+    - name: Create temporary directory for the download
+      tempfile:
+        state: directory
+      register: pkg_tmp
+      changed_when: no
+      check_mode: no
+
+    - name: Detect latest package from github
+      include_tasks: "latest.yml"
+      when: not pkg_url.endswith(pkg_extension)
+
+    - name: Use package url as is
+      set_fact:
+        final_pkg_url: "{{ pkg_url }}"
+      when: pkg_url.endswith(pkg_extension)
+
+    - name: Get application package from github
+      get_url:
+        url: "{{ final_pkg_url }}"
+        dest: "{{ pkg_tmp.path }}/"
+      changed_when: false
+      check_mode: no
+      register: pkg_file
+
+    - name: "Install application using custom steps"
+      include_tasks: "{{ pkg_install_tasks }}"
+
+  always:
+    - name: Remove temporary directory
+      file:
+        path: "{{ pkg_tmp.path }}"
+        state: absent
+      changed_when: no
+      check_mode: no
