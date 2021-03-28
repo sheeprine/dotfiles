@@ -4,15 +4,15 @@
     name: zsh
     state: present
 
-- name: Install zplugin dependencies
+- name: Install zinit dependencies
   homebrew:
-    name: "{{ zplugin_dependencies }} + ['fzf']"
+    name: "{{ zinit_dependencies }} + ['fzf']"
     state: present
 
 # TODO(sheeprine): This is sloppy as it's run every time
 - name: Install fzf binaries and scripts
   command: >
-    /usr/local/opt/fzf/install
+    $(brew --prefix)/opt/fzf/install
     --key-bindings --completion --no-update-rc --no-bash --no-fish
   args:
     creates: "{{ ansible_env['HOME'] }}/.zsh.fzf"

@@ -5,36 +5,39 @@
 - include_tasks: linux.yml
   when: ansible_system == "Linux"
 
-- name: Remove old zplug install
+- name: Remove old zplug/zplugin install
   file:
-    path: "{{ ansible_env.HOME }}/.zplug"
+    path: "{{ ansible_env.HOME }}/.{{ item }}"
     state: absent
+  loop:
+    - "zplug"
+    - "zplugin"
 
-- name: Install zplugin from sources
+- name: Install zinit from sources
   shell: >
     curl -fsSL
-    https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh |
-    zsh
+    https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh |
+    sh
   args:
-    creates: "{{ ansible_env.HOME }}/.zplugin"
+    creates: "{{ ansible_env.HOME }}/.zinit"
     warn: false
 
 - name: Create zsh config files
-  copy:
-    src: zshrc
+  template:
+    src: "zshrc.j2"
     dest: "{{ ansible_env.HOME }}/.zshrc"
 
 - name: Create zsh custom plugins directories
   file:
-    path: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---{{ item.path[:-11] }}"
+    path: "{{ ansible_env.HOME }}/.zinit/plugins/_local---{{ item.path[:-11] }}"
     state: directory
-  loop: "{{ q('filetree', 'files/zplugin/') }}"
+  loop: "{{ q('filetree', 'files/zinit/') }}"
 
 - name: Copy custom plugins
   copy:
     src: "{{ item.src }}"
-    dest: "{{ ansible_env.HOME }}/.zplugin/plugins/_local---{{ item.path[:-11] }}/"
-  loop: "{{ q('filetree', 'files/zplugin/') }}"
+    dest: "{{ ansible_env.HOME }}/.zinit/plugins/_local---{{ item.path[:-11] }}/"
+  loop: "{{ q('filetree', 'files/zinit/') }}"
 
 - name: Detect zsh path
   command: which zsh

@@ -1,5 +1,7 @@
 ---
-zplugin_dependencies:
+zinit_dependencies:
   - curl
   - gawk
   - git
+shell_zsh_prompt: "p10k"
+shell_use_fd: false
