@@ -4,4 +4,4 @@
   include_tasks: "install.yml"
   vars:
     pkg_extension: ".appimage"
-    pkg_extension: "_default.yml"
+    pkg_install_tasks: "_default.yml"
