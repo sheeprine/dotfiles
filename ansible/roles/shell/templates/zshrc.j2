@@ -39,7 +39,7 @@ zinit ice wait"0" has"git" lucid
 zinit light _local/gitshift
 
 # Prompt
-{% if zsh_prompt == "p10k" %}
+{% if shell_zsh_prompt == "p10k" %}
 zinit ice wait"0" depth"1"
 zinit light romkatv/powerlevel10k
 {% else %}
@@ -72,7 +72,7 @@ bindkey -e
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-{% if zsh_prompt == "pure" %}
+{% if shell_zsh_prompt == "pure" %}
 # Change ~ color to green when shell nested in ranger
 [ -n "$RANGER_LEVEL" ] && zstyle :prompt:pure:path color green
 
@@ -111,7 +111,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Lazy alias
 alias vim='nvim'
 alias vimdiff='nvim -d'
-{% if zsh_prompt == "p10k" %}
+{% if shell_zsh_prompt == "p10k" %}
 
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 {% endif %}
