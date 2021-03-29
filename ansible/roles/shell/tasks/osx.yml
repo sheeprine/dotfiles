@@ -11,7 +11,7 @@
 
 # TODO(sheeprine): This is sloppy as it's run every time
 - name: Install fzf binaries and scripts
-  command: >
+  shell: >
     $(brew --prefix)/opt/fzf/install
     --key-bindings --completion --no-update-rc --no-bash --no-fish
   args:
