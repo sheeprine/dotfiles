@@ -10,8 +10,22 @@ let g:python3_host_prog = stdpath('data').'/pyvenv/python3/bin/python'
 exe 'source '.stdpath('config').'/plugins.vim'
 
 " autocompletion
-let g:deoplete#enable_at_startup = 1
-let deoplete#sources#jedi#show_docstring = 1
+if has('nvim-0.5.0')
+  set completeopt=menuone,noselect
+  let g:loaded_compe_calc = 0
+  let g:loaded_compe_emoji = 0
+  let g:loaded_compe_luasnip = 0
+  let g:loaded_compe_nvim_lua = 0
+  let g:loaded_compe_path = 0
+  let g:loaded_compe_omni = 0
+  let g:loaded_compe_snippets_nvim = 0
+  let g:loaded_compe_spell = 0
+  let g:loaded_compe_tags = 0
+  let g:loaded_compe_treesitter = 0
+else
+  let g:deoplete#enable_at_startup = 1
+  let deoplete#sources#jedi#show_docstring = 1
+endif
 
 " Syntax highlighting
 filetype plugin indent on
@@ -42,17 +56,29 @@ set smartcase
 
 " Code folding
 set foldenable
-set foldmethod=indent
-
-" Colorscheme
-set background=dark
-" Detect if coloscheme is installed to avoid error on start
-if index(getcompletion('', 'color'), '{{ nvim_default_colorscheme }}') >= 0
-  colorscheme {{ nvim_default_colorscheme }}
+if !has('nvim-0.5.0')
+  set foldmethod=indent
 endif
+
 " Enable true colors if available
 if ($COLORTERM=='truecolor')
   set termguicolors
+endif
+
+" Colorscheme
+set background=dark
+" Detect if colorscheme is installed to avoid error on start
+if index(getcompletion('', 'color'), '{{ nvim_default_colorscheme }}') >= 0
+  colorscheme {{ nvim_default_colorscheme }}
+" Fallback on other colorschemes
+elseif index(getcompletion('', 'color'), 'sonokai') >= 0
+  colorscheme sonokai
+elseif index(getcompletion('', 'color'), 'gruvbox-material') >= 0
+  let g:gruvbox_material_palette = 'original'
+  let g:gruvbox_material_background = 'soft'
+  colorscheme gruvbox-material
+elseif index(getcompletion('', 'color'), 'gruvbox') >= 0
+  colorscheme gruvbox
 endif
 
 set pastetoggle=<F12>
@@ -90,78 +116,79 @@ set formatoptions-=t
 " Persistent undo tree
 set undofile
 
-" Switch directory to current file
-" NOTE(sheeprine): Disabled as it renders fzf and rg useless
-" autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-
 " Make vim quiet (no confirmation)
 set shortmess+=filmnrxoOtT
 
-" Lightline
-function! LightlineFugitive()
-  if exists('*fugitive#head')
-    let branch = fugitive#head()
-    return branch !=# '' ? ''.branch : ''
-  endif
-  return ''
-endfunction
+if has('nvim-0.5.0')
+  " Lightline
+  function! LightlineFugitive()
+    if exists('*fugitive#head')
+      let branch = fugitive#head()
+      return branch !=# '' ? ''.branch : ''
+    endif
+    return ''
+  endfunction
 
-function! LightlineReadonly()
-  return &readonly ? '' : ''
-endfunction
+  function! LightlineReadonly()
+    return &readonly ? '' : ''
+  endfunction
 
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'component': { 'lineinfo': ' %3l:%-2v' },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-\ }
+  let g:lightline = {
+        \ 'colorscheme': 'solarized',
+        \ 'component': { 'lineinfo': ' %3l:%-2v' },
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
 
-let g:lightline.component_function = {
-      \ 'readonly': 'LightlineReadonly',
-      \ 'fugitive': 'LightlineFugitive'
-\ }
+  let g:lightline.component_function = {
+        \ 'readonly': 'LightlineReadonly',
+        \ 'fugitive': 'LightlineFugitive'
+  \ }
 
-let g:lightline.component_expand = {
-      \ 'linter_checking': 'lightline#ale#checking',
-      \ 'linter_warnings': 'lightline#ale#warnings',
-      \ 'linter_errors': 'lightline#ale#errors',
-      \ 'linter_ok': 'lightline#ale#ok',
-\ }
+  let g:lightline.component_expand = {
+        \ 'linter_checking': 'lightline#ale#checking',
+        \ 'linter_warnings': 'lightline#ale#warnings',
+        \ 'linter_errors': 'lightline#ale#errors',
+        \ 'linter_ok': 'lightline#ale#ok',
+  \ }
 
-let g:lightline.component_type = {
-      \ 'linter_checking': 'left',
-      \ 'linter_warnings': 'warning',
-      \ 'linter_errors': 'error',
-      \ 'linter_ok': 'left',
-\ }
+  let g:lightline.component_type = {
+        \ 'linter_checking': 'left',
+        \ 'linter_warnings': 'warning',
+        \ 'linter_errors': 'error',
+        \ 'linter_ok': 'left',
+  \ }
 
-let g:lightline.active = {
-      \ 'left': [[
-        \ 'mode',
-        \ 'paste' ],
-        \ [ 'gitbranch',
-          \ 'readonly',
-          \ 'filename',
-          \ 'modified' ],
-      \ ],
-      \ 'right': [[
-        \ 'linter_checking',
-        \ 'linter_errors',
-        \ 'linter_warnings',
-        \ 'linter_ok' ],
-        \ [ 'lineinfo' ],
-        \ [ 'percent' ],
-        \ [ 'fileformat', 'fileencoding', 'filetype' ],
-      \]
-\ }
+  let g:lightline.active = {
+        \ 'left': [[
+          \ 'mode',
+          \ 'paste' ],
+          \ [ 'gitbranch',
+            \ 'readonly',
+            \ 'filename',
+            \ 'modified' ],
+        \ ],
+        \ 'right': [[
+          \ 'linter_checking',
+          \ 'linter_errors',
+          \ 'linter_warnings',
+          \ 'linter_ok' ],
+          \ [ 'lineinfo' ],
+          \ [ 'percent' ],
+          \ [ 'fileformat', 'fileencoding', 'filetype' ],
+        \]
+  \ }
+endif
 
-" fzf shortcuts
-nnoremap <silent> <Leader>f :Files<CR>
-nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <Leader>rg :Rg<Space>
-nnoremap <silent> <Leader>gc :Commits<CR>
+if !has('nvim-0.5.0')
+  " fzf shortcuts
+  nnoremap <silent> <Leader>f :Files<CR>
+  nnoremap <silent> <Leader>b :Buffers<CR>
+  nnoremap <Leader>rg :Rg<Space>
+endif
 
+nnoremap <silent> <Leader>gl :G log<CR>
+nnoremap <silent> <Leader>gc :G log<CR>
 nnoremap <silent> <Leader>gs :G<CR>
 
 " ALE
@@ -170,18 +197,37 @@ let g:ale_fixers = {
       \ }
 let g:ale_fix_on_save = 1
 
-" SuperTab
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
 " Tagbar
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
-" UltiSnips
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-
 " Move gutentags cache outside of project directory
 let g:gutentags_cache_dir = stdpath('data').'/tags'
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
+
+if has('nvim-0.5.0')
+  # Custom lua config for neovim > 0.5
+  lua require'treesitter-config'
+  lua require'lsp-config'
+  lua require'compe-config'
+  lua require'telescope-config'
+  lua require'lualine-config'
+
+  " Snippets expand or jump using CTRL+L
+  imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+  smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+endif
+
+if !has('nvim-0.5.0')
+  " Custom real time rg inside fzf
+  function! RipgrepFzf(query, fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+    let initial_command = printf(command_fmt, shellescape(a:query))
+    let reload_command = printf(command_fmt, '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+  endfunction
+  command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+endif

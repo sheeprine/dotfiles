@@ -34,6 +34,7 @@
   notify: "update neovim plugins"
   loop:
     - plugins.vim
+    - lua
 
 - name: Install vim-plug
   get_url:
