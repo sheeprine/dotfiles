@@ -9,6 +9,11 @@
     name: "{{ nvim_osx_dependencies }}"
     state: present
 
+- name: Install universal-ctags
+  homebrew:
+    name: "universal-ctags/universal-ctags/universal-ctags"
+    state: head
+
 - name: Install virtualenv
   pip:
     name: "virtualenv"
