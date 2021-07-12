@@ -35,6 +35,9 @@ if [[ $OSTYPE == darwin* ]]; then
   zinit snippet OMZP::osx
 fi
 
+zinit ice wait"0" lucid
+zinit snippet OMZP::safe-paste
+
 zinit ice wait"0" has"git" lucid
 zinit light _local/gitshift
 
