@@ -9,7 +9,8 @@ configs.setup {
     enable = true,
   },
   indent = {
-    enable = true
+    enable = true,
+    disable = {'yaml'}
   },
   rainbow = {
     enable = true
