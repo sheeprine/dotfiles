@@ -17,7 +17,6 @@ nvim_debian_dependencies:
   - python3-virtualenv
   - python3-setuptools
   - python3-dev
-  - mypy
 nvim_arch_dependencies:
   - base-devel
   - ctags
@@ -30,10 +29,8 @@ nvim_arch_dependencies:
   - python2-virtualenv
   - python2-setuptools
   - ripgrep
-  - mypy
 nvim_osx_dependencies:
   - git
   - golang
   - fzf
   - ripgrep
-  - mypy
