@@ -12,16 +12,6 @@ exe 'source '.stdpath('config').'/plugins.vim'
 " autocompletion
 if has('nvim-0.5.0')
   set completeopt=menuone,noselect
-  let g:loaded_compe_calc = 0
-  let g:loaded_compe_emoji = 0
-  let g:loaded_compe_luasnip = 0
-  let g:loaded_compe_nvim_lua = 0
-  let g:loaded_compe_path = 0
-  let g:loaded_compe_omni = 0
-  let g:loaded_compe_snippets_nvim = 0
-  let g:loaded_compe_spell = 0
-  let g:loaded_compe_tags = 0
-  let g:loaded_compe_treesitter = 0
 else
   let g:deoplete#enable_at_startup = 1
   let deoplete#sources#jedi#show_docstring = 1
@@ -211,13 +201,9 @@ if has('nvim-0.5.0')
   # Custom lua config for neovim > 0.5
   lua require'treesitter-config'
   lua require'lsp-config'
-  lua require'compe-config'
+  lua require'cmp-config'
   lua require'telescope-config'
   lua require'lualine-config'
-
-  " Snippets expand or jump using CTRL+L
-  imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-  smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 endif
 
 if !has('nvim-0.5.0')

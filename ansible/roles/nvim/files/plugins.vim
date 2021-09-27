@@ -58,7 +58,9 @@ if has('nvim-0.5.0')
   " Use neovim LSP integration
   Plug 'neovim/nvim-lspconfig'
   Plug 'kabouzeid/nvim-lspinstall'
-  Plug 'hrsh7th/nvim-compe'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/nvim-cmp'
 else
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -78,7 +80,7 @@ Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
 
 " Snippets
 if has('nvim-0.5.0')
-  Plug 'rafamadriz/friendly-snippets' | Plug 'hrsh7th/vim-vsnip'
+  Plug 'rafamadriz/friendly-snippets' | Plug 'L3MON4D3/LuaSnip' | Plug 'saadparwaiz1/cmp_luasnip'
 else
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 endif
