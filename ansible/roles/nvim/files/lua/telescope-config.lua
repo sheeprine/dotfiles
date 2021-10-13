@@ -19,4 +19,5 @@ local opts = {noremap = true, silent = true}
 vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files({ hidden = true })<CR>]], opts)
 vim.api.nvim_set_keymap('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], opts)
 vim.api.nvim_set_keymap('n', '<leader>rg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opts)
+vim.api.nvim_set_keymap('n', '<leader>rh', [[<cmd>lua require('telescope.builtin').live_grep({ additional_args=function(opts) return {'--hidden'} end})<CR>]], opts)
 vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<CR>]], opts)
