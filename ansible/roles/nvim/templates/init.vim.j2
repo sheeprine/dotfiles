@@ -11,7 +11,7 @@ exe 'source '.stdpath('config').'/plugins.vim'
 
 " autocompletion
 if has('nvim-0.5.0')
-  set completeopt=menuone,noselect
+  set completeopt=menuone
 else
   let g:deoplete#enable_at_startup = 1
   let deoplete#sources#jedi#show_docstring = 1
