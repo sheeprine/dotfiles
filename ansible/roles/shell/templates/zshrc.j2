@@ -111,6 +111,8 @@ fi
 if [[ $OSTYPE == darwin* ]]; then
   # Override default macOS python2 install
   export PATH="/usr/local/opt/python@2/bin:$PATH"
+  # Homebrew sbin folder
+  export PATH="/usr/local/sbin:$PATH"
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
