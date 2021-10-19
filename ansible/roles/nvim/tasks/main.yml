@@ -71,7 +71,7 @@
     name: "nvim clean tags not modified since 15 days"
     minute: "0"
     user: "{{ ansible_user_id }}"
-    job: "find {{ ansible_env.HOME }}/.local/share/nvim/tags -mtime +15 -delete"
+    job: "find {{ ansible_env.HOME }}/.local/share/nvim/tags -mindepth 1 -mtime +15 -delete"
   when: ansible_os_family != "Archlinux"
 
 - name: Create systemd user folder
