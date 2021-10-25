@@ -40,6 +40,24 @@
     state: present
   when: ansible_os_family == "Archlinux"
 
+- name: "Install standard utils alternatives"
+  become: true
+  package:
+    name:
+      - "bat"
+      - "fd"
+    state: present
+
+- name: "Create bat config directory"
+  file:
+    path: "{{ ansible_env.HOME }}/.config/bat/"
+    state: "directory"
+
+- name: "Copy bat configuration"
+  template:
+    src: "batconfig.j2"
+    dest: "{{ ansible_env.HOME }}/.config/bat/config"
+
 # FIXME(sheeprine): Do more than copying tmux configuration
 - name: Copy tmux configuration
   copy:

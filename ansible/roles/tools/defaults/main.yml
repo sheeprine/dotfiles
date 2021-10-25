@@ -21,3 +21,4 @@ ranger_osx_packages:
   - highlight
   - poppler
 gopass_deb_pkg: "https://github.com/gopasspw/gopass"
+bat_theme: "gruvbox-dark"
