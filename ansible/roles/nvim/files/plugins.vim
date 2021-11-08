@@ -47,7 +47,7 @@ Plug 'dense-analysis/ale'
 
 " Status line
 if has('nvim-0.5.0')
-  Plug 'hoob3rt/lualine.nvim' | Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'nvim-lualine/lualine.nvim' | Plug 'kyazdani42/nvim-web-devicons'
 else
   Plug 'itchyny/lightline.vim' | set noshowmode
   Plug 'maximbaz/lightline-ale'
