@@ -76,7 +76,7 @@ else
   Plug 'zchee/deoplete-jedi'
 endif
 
-Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
+" Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
 
 " Snippets
 if has('nvim-0.5.0')
