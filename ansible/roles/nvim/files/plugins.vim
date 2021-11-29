@@ -57,7 +57,7 @@ endif
 if has('nvim-0.5.0')
   " Use neovim LSP integration
   Plug 'neovim/nvim-lspconfig'
-  Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'williamboman/nvim-lsp-installer'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
@@ -75,8 +75,6 @@ else
   " Python
   Plug 'zchee/deoplete-jedi'
 endif
-
-" Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
 
 " Snippets
 if has('nvim-0.5.0')

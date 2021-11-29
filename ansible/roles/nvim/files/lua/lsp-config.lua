@@ -1,5 +1,5 @@
 local nvim_lsp = require'lspconfig'
-local lspinstall = require'lspinstall'
+local lsp_installer = require'nvim-lsp-installer'
 
 vim.cmd('sign define LspDiagnosticsSignError text=✖')
 vim.cmd('sign define LspDiagnosticsSignWarning text=✖')
@@ -43,15 +43,13 @@ local lsp_on_attach = function(client, bufnr)
   print('Language server is ready')
 end
 
--- Activating snippets in LSP
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
-lspinstall.setup()
-local servers = lspinstall.installed_servers()
-for _, server in pairs(servers) do
-  nvim_lsp[server].setup{
-    capabilities = capabilities,
+lsp_installer.on_server_ready(function(server)
+  -- Activating snippets in LSP
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  local opts = {
     on_attach = lsp_on_attach,
+    capabilities = capabilities,
   }
-end
+  server:setup(opts)
+end)
