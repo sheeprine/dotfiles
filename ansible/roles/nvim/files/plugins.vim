@@ -70,11 +70,11 @@ else
 
   " Language specific completion
   " Go
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'zchee/deoplete-go', { 'do': 'make'}
   " Python
   Plug 'zchee/deoplete-jedi'
 endif
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Snippets
 if has('nvim-0.5.0')
