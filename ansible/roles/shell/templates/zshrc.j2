@@ -125,6 +125,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Lazy alias
 alias vim='nvim'
 alias vimdiff='nvim -d'
+alias nossh='ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 {% if shell_zsh_prompt == "p10k" %}
 
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
