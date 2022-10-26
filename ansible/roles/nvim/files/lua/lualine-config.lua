@@ -10,7 +10,7 @@ require('lualine').setup{
     lualine_a = { {'mode', upper = true} },
     lualine_b = { {'branch', icon = ''} },
     lualine_c = { {'filename', file_status = true}, 'diff' },
-    lualine_x = { {'diagnostics', sources= {'nvim_lsp', 'ale'} }, 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { {'diagnostics', sources= {'nvim_diagnostic', 'ale'} }, 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location'  },
   },
