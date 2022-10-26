@@ -49,6 +49,8 @@ set foldenable
 if !has('nvim-0.5.0')
   set foldmethod=indent
 endif
+set foldcolumn=2
+set foldminlines=3
 
 " Enable true colors if available
 if ($COLORTERM=='truecolor')
@@ -217,3 +219,13 @@ if !has('nvim-0.5.0')
   endfunction
   command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 endif
+augroup folds
+  au!
+  au InsertEnter * let w:oldfdm = &l:foldmethod | setlocal foldmethod=manual
+  au InsertLeave *
+        \ if exists('w:oldfdm') |
+        \   let &l:foldmethod = w:oldfdm |
+        \   unlet w:oldfdm |
+        \ endif |
+        \ normal! zv
+augroup END
