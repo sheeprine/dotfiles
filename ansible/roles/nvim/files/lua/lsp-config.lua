@@ -1,5 +1,5 @@
-local nvim_lsp = require'lspconfig'
 local lsp_installer = require'nvim-lsp-installer'
+local nvim_lsp = require'lspconfig'
 
 vim.cmd('sign define LspDiagnosticsSignError text=✖')
 vim.cmd('sign define LspDiagnosticsSignWarning text=✖')
@@ -26,7 +26,7 @@ local lsp_on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_exec([[
       hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
       hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
@@ -43,13 +43,47 @@ local lsp_on_attach = function(client, bufnr)
   print('Language server is ready')
 end
 
-lsp_installer.on_server_ready(function(server)
-  -- Activating snippets in LSP
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-  local opts = {
-    on_attach = lsp_on_attach,
-    capabilities = capabilities,
-  }
-  server:setup(opts)
-end)
+lsp_installer.setup({
+  automatic_installation = true,
+})
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+nvim_lsp.pyright.setup{
+  on_attach = lsp_on_attach,
+  capabilities = capabilities,
+  settings = {
+    python = {
+      analysis = {
+        autoImportCompletions = false,
+      },
+    },
+  },
+}
+
+nvim_lsp.sumneko_lua.setup{
+  on_attach = lsp_on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+    },
+  },
+}
+
+nvim_lsp.gopls.setup{
+  on_attach = lsp_on_attach,
+  capabilities = capabilities,
+}
+
+nvim_lsp.yamlls.setup{
+  on_attach = lsp_on_attach,
+  capabilities = capabilities,
+}
+
+nvim_lsp.bashls.setup{
+  on_attach = lsp_on_attach,
+  capabilities = capabilities,
+}
