@@ -192,6 +192,11 @@ let g:ale_fix_on_save = 1
 " Tagbar
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
+" Tests mappings
+nnoremap <silent> <Leader>ts :TestSuite<CR>
+nnoremap <silent> <Leader>tf :TestFile<CR>
+nnoremap <silent> <Leader>tn :TestNearest<CR>
+
 " Move gutentags cache outside of project directory
 let g:gutentags_cache_dir = stdpath('data').'/tags'
 let g:gutentags_ctags_extra_args = [
@@ -219,6 +224,13 @@ if !has('nvim-0.5.0')
   endfunction
   command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 endif
+
+let test#strategy = {
+  \ 'nearest': 'neovim',
+  \ 'file':    'make',
+  \ 'suite':   'neovim',
+\}
+
 augroup folds
   au!
   au InsertEnter * let w:oldfdm = &l:foldmethod | setlocal foldmethod=manual
