@@ -63,6 +63,10 @@ if has('nvim-0.5.0')
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
+
+  Plug 'folke/trouble.nvim'
+  " Debug Adapter
+  Plug 'mfussenegger/nvim-dap'
 else
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -76,7 +80,6 @@ else
   " Python
   Plug 'zchee/deoplete-jedi'
 endif
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Snippets
 if has('nvim-0.5.0')
@@ -94,6 +97,8 @@ else
 endif
 Plug 'vim-test/vim-test'
 
+" Go syntax plugin
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " OpenSCAD syntax highlighting
 Plug 'sirtaj/vim-openscad'
 " GCode syntax highlighting
