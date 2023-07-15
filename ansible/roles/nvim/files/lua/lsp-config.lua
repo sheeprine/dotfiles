@@ -1,4 +1,14 @@
-local lsp_installer = require'nvim-lsp-installer'
+local mason = require'mason'
+mason.setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
+    }
+  }
+})
+local mason_lsp = require'mason-lspconfig'
 local nvim_lsp = require'lspconfig'
 
 vim.cmd('sign define LspDiagnosticsSignError text=✖')
@@ -26,24 +36,24 @@ local lsp_on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
-  if client.server_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
+  -- if client.server_capabilities.document_highlight then
+  --   vim.api.nvim_exec([[
+  --     hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+  --     hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+  --     hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+  --     augroup lsp_document_highlight
+  --       autocmd! * <buffer>
+  --       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+  --       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+  --     augroup END
+  --   ]], false)
+  -- end
 
   -- Indicate when language server is ready.
   print('Language server is ready')
 end
 
-lsp_installer.setup({
+mason_lsp.setup({
   automatic_installation = true,
 })
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -61,7 +71,7 @@ nvim_lsp.pyright.setup{
   },
 }
 
-nvim_lsp.sumneko_lua.setup{
+nvim_lsp.lua_ls.setup{
   on_attach = lsp_on_attach,
   capabilities = capabilities,
   settings = {
