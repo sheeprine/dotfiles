@@ -4,6 +4,10 @@ local actions = require'telescope.actions'
 -- Override default send to quickfix
 telescope.setup{
   defaults = {
+    file_ignore_patterns = {
+      "^vendor/",
+      "^plugged/",
+    },
     mappings = {
       i = {
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
