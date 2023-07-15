@@ -180,8 +180,9 @@ if !has('nvim-0.5.0')
 endif
 
 nnoremap <silent> <Leader>gl :G log<CR>
-nnoremap <silent> <Leader>gc :G log<CR>
-nnoremap <silent> <Leader>gs :G<CR>
+nnoremap <silent> <Leader>gm :G log main..HEAD<CR>
+nnoremap <silent> <Leader>gs :Gtabedit :<CR>
+nnoremap <silent> <Leader>gb :G branch<CR>
 
 " ALE
 let g:ale_fixers = {
