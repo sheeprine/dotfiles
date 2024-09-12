@@ -1,5 +1,7 @@
 ## sheeprine's dotfiles ##
 
-Refactor of my dotfiles.
+Setup using the following oneliner:
 
-*WIP*
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/sheeprine/dotfiles/master/bootstrap.sh)"
+```

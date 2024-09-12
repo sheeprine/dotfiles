@@ -100,8 +100,8 @@ if [ -d ~/.go ]; then
   export PATH="$GOPATH/bin:$PATH"
 fi
 if [[ $OSTYPE == darwin* ]]; then
-  # Homebrew sbin folder
-  export PATH="/usr/local/sbin:$PATH"
+  # Homebrew in PATH
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
