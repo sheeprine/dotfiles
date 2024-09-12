@@ -7,7 +7,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>{{ joinPath .chezmoi.homeDir ".local/bin/nvim-cleanup" }}</string>
-    <string>{{ nvim.cleanup_interval }}</string>
+    <string>{{ .nvim.cleanup_interval }}</string>
   </array>
   <key>StartInterval</key>
   <integer>3600</integer>
