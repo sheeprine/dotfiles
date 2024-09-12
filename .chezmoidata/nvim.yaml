@@ -4,8 +4,8 @@ nvim:
     - git
     - ripgrep
     - golang
-  prereqs_packages_darwin:
-    - pbcopy
+    - neovim
+  prereqs_packages_darwin: []
   lsp_packages:
     - luarocks
     - node
