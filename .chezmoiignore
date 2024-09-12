@@ -1,0 +1,12 @@
+bootstrap.sh
+check.sh
+deploy.sh
+README.md
+TODO.md
+{{ if ne .chezmoi.os "darwin" -}}
+Library/
+{{ else -}}
+.config/i3
+.config/rofi
+.config/systemd
+{{ end -}}

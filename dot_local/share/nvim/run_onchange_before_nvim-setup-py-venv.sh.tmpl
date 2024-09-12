@@ -1,0 +1,5 @@
+#!/bin/sh
+
+{{ $venvDir := joinPath .chezmoi.homeDir ".local/share/nvim/pyvenv" -}}
+python -m venv {{ $venvDir }}
+{{ joinPath $venvDir "bin/pip" }} install neovim

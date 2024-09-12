@@ -1,0 +1,9 @@
+#!/bin/sh
+
+{{- $pkg := .nvim.prereqs_packages }}
+{{ if eq .chezmoi.os "darwin" -}}
+  {{- $pkg = concat $pkg .nvim.prereqs_packages_darwin }}
+{{- end }}
+{{- $pkg = concat $pkg .nvim.lsp_packages }}
+{{ $args := dict "chezmoi" .chezmoi "packages" $pkg -}}
+{{ template "install.tmpl" $args }}

@@ -1,0 +1,74 @@
+{{/*
+Vim setup
+*/}}
+{{- $useVIM := promptBoolOnce . "useVIM" "Install vim" true -}}
+{{- $nvimRetention := 15 -}}
+{{- if $useVIM -}}
+{{- writeToStdout "neovim defaults:\n" -}}
+{{- writeToStdout (printf "\tcleaup_retention: %d days\n" $nvimRetention) -}}
+{{- $customNvim := not (promptBoolOnce . "customNvim" "Use default neovim settings" true) -}}
+{{- if $customNvim -}}
+{{- $nvimRetention = promptInt "Delete state files unmodified for N days" 15 -}}
+{{- end -}}
+{{- end -}}
+{{/*
+Shell setup
+*/}}
+{{- $shellPrompt := "p10k" -}}
+{{- $useFD := true -}}
+{{- writeToStdout "Shell defaults:\n" -}}
+{{- writeToStdout (printf "\tzsh_prompt: %s\n" $shellPrompt) -}}
+{{- writeToStdout (printf "\tuse_fd: %t\n" $useFD) -}}
+{{- $customShell := not (promptBoolOnce . "customShell" "Use default shell options" true) -}}
+{{- if eq $customShell true -}}
+{{- $shellPrompt = promptChoice "Which zsh_prompt" (list "p10k" "pure") $shellPrompt -}}
+{{- $useFD = promptBool "Use fd" $useFD -}}
+{{- end -}}
+{{/*
+Term setup
+*/}}
+{{- $installWezTerm := promptBoolOnce . "installWezTerm" "Install WezTerm" true -}}
+{{/*
+WM setup (Linux)
+*/}}
+{{- $dmenuProvider := "rofi" -}}
+{{- if ne .chezmoi.os "darwin" -}}
+{{- writeToStdout "WM defaults:\n" -}}
+{{- writeToStdout (printf "\tdmenu_provider: %s\n" $dmenuProvider) -}}
+{{- $customWM := not (promptBoolOnce . "customWM" "Use default WM settings" true) -}}
+{{- if $customWM -}}
+{{- $dmenuProvider = promptChoice "Select dmenu provider" (list "i3" "j4" "rofi") $dmenuProvider -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Set variables to use in templates
+*/}}
+data:
+  shell:
+    zsh_prompt: {{ $shellPrompt | quote }}
+    use_fd: {{ $useFD }}
+    zinit_packages:
+      - curl
+      {{- if $useFD }}
+      - fd
+      {{- end }}
+      - gawk
+      - git
+  nvim:
+    cleanup_interval: {{ $nvimRetention | quote }}
+  term:
+    packages:
+      {{- if $installWezTerm }}
+      - wezterm
+      {{- end }}
+  {{- if ne .chezmoi.os "darwin" }}
+  wm:
+    placeholder: true  # Force the dict to get populated
+    {{- if ne $dmenuProvider "rofi" }}
+    use_rofi: false
+    {{- end }}
+    {{- if eq $dmenuProvider "j4" }}
+    use_j4: true
+    {{- end }}
+  {{- end }}

@@ -1,0 +1,9 @@
+[Unit]
+Description=Check hourly if neovim cleanup is required
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target

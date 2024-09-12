@@ -1,0 +1,4 @@
+#!/bin/sh
+
+{{ $args := dict "chezmoi" .chezmoi "packages" .shell.zinit_packages -}}
+{{ template "install.tmpl" $args }}

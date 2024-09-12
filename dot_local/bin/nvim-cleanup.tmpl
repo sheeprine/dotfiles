@@ -1,0 +1,32 @@
+#!/bin/sh
+
+NVIM_STATE="{{ .chezmoi.homeDir }}/.local/state/nvim"
+
+RETENTION_DAYS="${1:-{{ .nvim.cleanup_interval }}}"
+
+# Delete temporary shared data files older than 1 day
+find "${NVIM_STATE}/shada" -iname "*.tmp*" -ctime +1 -delete
+
+# Delete swap files unmodified for more than {{ .nvim.cleanup_interval}} days
+find "${NVIM_STATE}/swap" -mtime "+${RETENTION_DAYS}" -delete
+
+# Delete undo files unmodified for more than {{ .nvim.cleanup_interval}} days
+find "${NVIM_STATE}/undo" -mtime "+${RETENTION_DAYS}" -delete
+
+# Purge old unused log files for more than {{ .nvim.cleanup_interval}} days
+find "${NVIM_STATE}" -maxdepth 1 -iname "*log*" -mtime "+${RETENTION_DAYS}" -delete
+
+logrotate() {
+  logfile="$1"
+  keep_lines="${2:-1000}"
+  swapfile=$(mktemp)
+  tail -n "$keep_lines" "$logfile" > "$swapfile"
+  truncate -s 0 "$logfile"
+  cat "$swapfile" > "$logfile"
+  rm "$swapfile"
+}
+
+# Truncate log files too large
+for f in $(find "${NVIM_STATE}" -maxdepth 1 -iname "*log*" -size +1M); do
+  logrotate "$f"
+done

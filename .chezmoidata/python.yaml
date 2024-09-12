@@ -1,0 +1,10 @@
+python:
+  prereqs_packages:
+    - python
+    - pyenv
+    - pipx
+  pipx_packages:
+    - awsume
+    - black
+    - coverage
+    - poetry

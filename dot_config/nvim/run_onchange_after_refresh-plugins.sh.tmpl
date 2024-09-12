@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Plugins configuration hashes:
+{{- range glob ".config/nvim/lua/config/plugins/*.lua" }}
+#   - {{ . | base }} ({{ include (joinPath $.chezmoi.homeDir .) | sha256sum }})
+{{- else }}
+#   No plugin
+{{- end }}
+
+nvim --headless "+Lazy! sync" +qa

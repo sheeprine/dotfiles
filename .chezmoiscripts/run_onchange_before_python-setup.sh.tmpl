@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# system packages
+{{ $args := dict "chezmoi" .chezmoi "packages" .python.prereqs_packages -}}
+{{ template "install.tmpl" $args }}
+
+# pipx packages
+{{ range .python.pipx_packages -}}
+pipx install {{ . | quote }}
+{{ end -}}

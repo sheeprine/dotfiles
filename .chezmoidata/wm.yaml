@@ -1,0 +1,12 @@
+wm:
+  use_rofi: true
+  use_j4: false
+  use_vim_bindings: true
+  remap_caps_as_escape: true
+  prereqs_packages:
+    - git
+    - ripgrep
+    - golang
+  additional_packages:
+    - rofi
+    - xdotool

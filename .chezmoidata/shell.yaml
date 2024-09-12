@@ -1,0 +1,11 @@
+shell:
+  prereqs_packages:
+    - zsh
+    - fzf
+    - tmux
+    - bat
+    - fd
+  prereqs_packages_darwin:
+    - reattach-to-user-namespace
+  prereqs_packages_linux:
+    - xsel

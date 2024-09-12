@@ -1,0 +1,12 @@
+nvim:
+  cleanup_interval: 15
+  prereqs_packages:
+    - git
+    - ripgrep
+    - golang
+  prereqs_packages_darwin:
+    - pbcopy
+  lsp_packages:
+    - luarocks
+    - node
+    - npm

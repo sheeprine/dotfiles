@@ -1,6 +1,0 @@
-[Unit]
-Description=nvim cleanup of tags not modified since 15 days
-
-[Service]
-type=oneshot
-ExecStart=/usr/bin/find {{ ansible_env.HOME }}/.local/share/nvim/tags -mtime +15 -delete

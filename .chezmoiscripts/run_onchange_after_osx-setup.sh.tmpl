@@ -1,0 +1,23 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+
+# Add tap to click on the trackpad
+defaults -currentHost write -globalDomain com.apple.mouse.tapBehavior -int 1
+# Disable mouse acceleration for external devices
+defaults write -globalDomain com.apple.mouse.linear -bool YES
+
+# Disable DS_Store on network drives
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool YES
+# Disable DS_Store on USB drives
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool YES
+# Show battery percentage
+defaults write com.apple.menuextra.battery ShowPercent -bool YES
+
+# Remap caps lock to escape
+defaults -currentHost write -globalDomain \
+  "com.apple.keyboard.modifiermapping.1452-832-0" -dict \
+  HIDKeyboardModifierMappingDst 30064771113 \
+  HIDKeyboardModifierMappingSrc 30064771129
+# Set F-Keys as default
+defaults -currentHost write -globalDomain com.apple.keyboard.fnState -int 1
+{{ end -}}

@@ -1,0 +1,6 @@
+[Unit]
+Description=Perform neovim cleanup
+
+[Service]
+type=oneshot
+ExecStart={{ .chezmoi.homeDir }}/.local/bin/nvim-cleanup

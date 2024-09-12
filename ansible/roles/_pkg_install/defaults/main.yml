@@ -1,5 +1,0 @@
----
-
-pkg_extension: ".deb"
-pkg_install_tasks: "_deb.yml"
-pkg_dest_dir: "{{ ansible_env.HOME }}/.local/bin"

@@ -1,9 +1,0 @@
----
-use_rofi: true
-rofi_gopass: "https://raw.githubusercontent.com/Algram/rofi-gopass/\
-              6d8bbe9dee4ae99bbbc33b079963e77eb927f820/rofi-gopass.sh"
-use_j4: false
-use_vim_bindings: true
-remap_caps_as_escape: true
-keyboard_layout: "us"
-keyboard_variant: "intl"

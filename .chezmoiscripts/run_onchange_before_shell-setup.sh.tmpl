@@ -1,0 +1,10 @@
+#!/bin/sh
+
+{{- $pkg := .shell.prereqs_packages }}
+{{ if eq .chezmoi.os "darwin" -}}
+  {{- $pkg = concat $pkg .shell.prereqs_packages_darwin }}
+{{- else -}}
+  {{- $pkg = concat $pkg .shell.prereqs_packages_linux }}
+{{- end }}
+{{ $args := dict "chezmoi" .chezmoi "packages" $pkg -}}
+{{ template "install.tmpl" $args }}
