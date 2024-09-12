@@ -6,6 +6,7 @@ shell:
     - bat
     - fd
   prereqs_packages_darwin:
+    - font-meslo-for-powerlevel10k
     - reattach-to-user-namespace
   prereqs_packages_linux:
     - xsel
