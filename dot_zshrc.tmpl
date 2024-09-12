@@ -8,7 +8,11 @@ fi
 
 {{ end -}}
 # Load zinit
-source "$HOME/.zinit/bin/zinit.zsh"
+if [[ $OSTYPE == darwin* ]]; then
+  source /opt/homebrew/opt/zinit/zinit.zsh
+else
+  source "$HOME/.zinit/bin/zinit.zsh"
+fi
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
