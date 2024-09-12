@@ -72,3 +72,6 @@ vim.opt.shortmess:append({
   t = true,
   T = true,
 })
+
+-- Set neovim dedicated python virtualenv
+vim.g.python3_host_prog = vim.fn.stdpath("data") .. "/pyvenv/bin/python"
