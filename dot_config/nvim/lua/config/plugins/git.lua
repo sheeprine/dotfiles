@@ -5,7 +5,7 @@ return {
     keys = {
       {"<leader>gl", function() vim.cmd.Git("log") end},
       {"<leader>gm", function() vim.cmd.Git("log main..HEAD") end},
-      {"<leader>gs", function() vim.cmd.Gtabedit(":") end},
+      {"<leader>gs", function() vim.cmd.Git() end},
       {"<leader>gb", function() vim.cmd.Git("branch") end},
     },
     cmd = "Git",
