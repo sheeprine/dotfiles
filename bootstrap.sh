@@ -3,7 +3,7 @@
 OS=$(uname)
 if [ "$OS" = "Darwin" ]; then
   set -e
-  if [ "$(command -v brew)" ]; then
+  if [ ! "$(command -v brew)" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
