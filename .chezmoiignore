@@ -5,6 +5,7 @@ README.md
 TODO.md
 {{ if ne .chezmoi.os "darwin" -}}
 Library/
+.config/aerospace
 {{ else -}}
 .config/i3
 .config/rofi
