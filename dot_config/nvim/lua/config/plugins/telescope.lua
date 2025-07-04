@@ -25,9 +25,13 @@ return {
       local actions = require"telescope.actions"
       require("telescope").setup({
         defaults = {
+          treesitter = false,
           file_ignore_patterns = {
             "^vendor/",
             "^plugged/",
+            "^.git/",
+            "^__pycache__/",
+            "^htlmcov/",
           },
           mappings = {
             i = {
@@ -46,7 +50,7 @@ return {
       local opts = {remap = false, silent = true}
       vim.keymap.set("n", "<leader>f", function () builtin.find_files({hidden=true}) end, opts)
       vim.keymap.set("n", "<leader>b", builtin.buffers, opts)
-      vim.keymap.set("n", "<leader>rg", builtin.live_grep, opts)
+      vim.keymap.set("n", "<leader>rg", function () builtin.live_grep({debounce=500, shorten_path=true, only_sort_text=true,}) end, opts)
       vim.keymap.set("n", "<leader>rh", function ()
         builtin.live_grep({
           prompt_title="Live Grep (hidden)",
