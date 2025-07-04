@@ -12,8 +12,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     {
       "j-hui/fidget.nvim",
-      version = "1.4.*",
-      config = true,
+      opts = {},
     },
   },
   config = function()
@@ -26,6 +25,58 @@ return {
         cmp_lsp.default_capabilities())
 
     require("mason").setup()
+    vim.lsp.config('lua_ls', {
+      on_init = function(client)
+        if client.workspace_folders then
+          local path = client.workspace_folders[1].name
+          if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc')) then
+            return
+          end
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+          runtime = {
+            -- Tell the language server which version of Lua you're using
+            -- (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT'
+          },
+          -- Make the server aware of Neovim runtime files
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              vim.env.VIMRUNTIME
+              -- Depending on the usage, you might want to add additional paths here.
+              -- "${3rd}/luv/library"
+              -- "${3rd}/busted/library",
+            }
+            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+            -- library = vim.api.nvim_get_runtime_file("", true)
+          }
+        })
+      end,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+          }
+        }
+      }
+    })
+    vim.lsp.config('bashls', {
+      settings = {
+        bashIde = {
+          globPattern = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command|.zsh)',
+        },
+      },
+      filetypes = {"bash", "sh", "zsh"}
+    })
+    -- local handlers = {
+    --   function(server_name)
+    --     require("lspconfig")[server_name].setup {
+    --       capabilities = capabilities
+    --     }
+    --   end,
+    -- }
     require("mason-lspconfig").setup({
       ensure_installed = {
         "bashls",
@@ -37,28 +88,15 @@ return {
         "gopls",
         "yamlls",
       },
-      handlers = {
-        function(server_name)
-          require("lspconfig")[server_name].setup {
-            capabilities = capabilities
-          }
-        end,
-        ["lua_ls"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.lua_ls.setup {
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                runtime = { version = "Lua 5.1" },
-                diagnostics = {
-                  globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-                }
-              }
-            }
-          }
-        end,
-      }
+      handlers = handlers
     })
+
+    vim.lsp.enable("bashls")
+    vim.lsp.enable("basedpyright")
+    vim.lsp.enable("lua_ls")
+    vim.lsp.enable("rust_analyzer")
+    vim.lsp.enable("gopls")
+    vim.lsp.enable("yamlls")
 
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
     cmp.setup({
@@ -85,14 +123,16 @@ return {
     })
 
     vim.diagnostic.config({
-        -- update_in_insert = true,
       float = {
         focusable = false,
         style = "minimal",
         border = "rounded",
-        source = "always",
+        source = true,
         header = "",
         prefix = "",
+      },
+      virtual_lines = {
+        current_line=true,
       },
     })
     local Lsp_Plugin = vim.api.nvim_create_augroup("Lsp_Plugin", {})
@@ -104,15 +144,8 @@ return {
         local opts = {buffer = true, remap = false, silent = true}
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        -- Reusing gi mapping as I has the same behavior.
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "gR", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "[d", function() vim.lsp.diagnostic.goto_prev() end, opts)
-        vim.keymap.set("n", "]d", function() vim.lsp.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
         vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
         print("Loaded keybindings")
       end
