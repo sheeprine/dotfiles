@@ -108,7 +108,7 @@ if [[ $OSTYPE == darwin* ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 export PATH="$HOME/.local/bin:$PATH"
-export CLOUDSDK_PYTHON="$(which python3.11)"
+export CLOUDSDK_PYTHON="$(which python3)"
 
 {{ if .shell.use_fd -}}
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --color=always"
